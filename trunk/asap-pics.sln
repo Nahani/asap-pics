@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asap-pics", "asap-pics\asap-pics.csproj", "{1C25C251-EC80-4740-9A30-88FDBB1329EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestImage", "TestImage\TestImage.csproj", "{68CFE06C-314B-4E81-ADB3-1820E44EAD8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C25C251-EC80-4740-9A30-88FDBB1329EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C25C251-EC80-4740-9A30-88FDBB1329EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C25C251-EC80-4740-9A30-88FDBB1329EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C25C251-EC80-4740-9A30-88FDBB1329EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68CFE06C-314B-4E81-ADB3-1820E44EAD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CFE06C-314B-4E81-ADB3-1820E44EAD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CFE06C-314B-4E81-ADB3-1820E44EAD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CFE06C-314B-4E81-ADB3-1820E44EAD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
