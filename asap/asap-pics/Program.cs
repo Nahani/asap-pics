@@ -9,6 +9,7 @@ namespace asap_pics
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Salut !");
         }
     }
 }
