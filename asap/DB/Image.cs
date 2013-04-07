@@ -1,4 +1,17 @@
-﻿using System;
+﻿/**
+ * 	Fichier : Image.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des échanges de base avec la base de données : ADD & DELETE ;
+ * 		- Récupération des valeurs d'attributs.
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Entité lien avec la base de données PICASA définissant les images d'un album appartenant à un utilisateur cible. 
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +24,16 @@ namespace DB
 {
     public class Img
     {
+        // Identifiant unique clé primaire de l'image cible
         private int id;
+
+        // Identifiant de l'utilisateur propriété clé étrangère
         private int idUser;
+
+        // Nom de l'image courante
         private string name;
+
+        // Image cible
         private byte[] image;
 
         /** 
