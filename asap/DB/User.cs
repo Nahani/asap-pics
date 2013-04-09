@@ -1,4 +1,17 @@
-﻿using System;
+﻿/**
+ * 	Fichier : User.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des échanges de base avec la base de données : ADD & DELETE ;
+ * 		- Récupération des valeurs d'attributs.
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Entité lien avec la base de données PICASA définissant les utilisateurs cibles. 
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
