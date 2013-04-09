@@ -46,7 +46,7 @@ namespace DB
          */
         public Img(int idUser, string name, byte[] img)
         {
-            id = 0;
+            this.id = 0;
             this.name = name;
             this.idUser = idUser;
             this.image = img;
@@ -126,7 +126,7 @@ namespace DB
         /*
          * Ajouter une image dans la Base De Données
          * 
-         * @return true si l'image a bien été ajoutée, faux le cas échéant
+         * @return true si l'image a bien été ajoutée, false le cas échéant
          * 
          */
         public bool Add()
@@ -134,7 +134,7 @@ namespace DB
             bool flag = false;
             if (Get_Id(idUser, name) == -1)
             {
-                String req = "INSERT INTO Image (idUser, name, size, image) " + "VALUES('" + idUser + "', '" + name + "', '" + image.Length + "', '" + image + "')";
+                String req = "INSERT INTO IMAGE (idUser, name, size, image) " + "VALUES('" + idUser + "', '" + name + "', '" + image.Length + "', '" + image + "')";
                 flag = Connexion.execute_Request(req);
             }
             return flag;
@@ -143,13 +143,16 @@ namespace DB
         /*
          * Supprimer une image de la Base De Données
          * 
-         * @return true si l'image a bien été supprimée, faux le cas échéant
+         * @param id        : l'identifiant de l'image cible
+         * @param idUser    : l'identifiant de l'utilisateur propriétaire
+         * 
+         * @return true si l'image a bien été supprimée, false le cas échéant
          * 
          */
         public static bool Delete(int id, int idUser)
         {
             bool flag = false;
-            String req = "DELETE FROM Image WHERE id = '" + id + "' AND idUser='" + idUser + "';";
+            String req = "DELETE FROM IMAGE WHERE id = '" + id + "' AND idUser='" + idUser + "';";
             flag = Connexion.execute_Request(req);
             return flag;
         }
