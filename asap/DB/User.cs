@@ -22,8 +22,6 @@ namespace DB
 {
     class User
     {
-
-        private int idUser;
         private String first_name;
         private String last_name;
         private String login;
@@ -46,7 +44,6 @@ namespace DB
          */
         public User(String first_name, String last_name, String login, String password, String mail, bool level = false)
         {
-            this.idUser = 0;
             this.first_name = first_name;
             this.last_name = last_name;
             this.login = login;
@@ -99,7 +96,6 @@ namespace DB
             return exists;
         }
 
-
         /*
          * Ajouter un utilisateur dans la Base De Données
          * 
@@ -139,7 +135,7 @@ namespace DB
          * @param login : le login de l'utilisateur cible
          * @param id    : l'identifiant de l'utilisateur cible
          * 
-         * @return true si l'utilisateur a bien été supprimé, false le cas échéant
+         * @return l'utilisateur s'il a bien été récupéré, null le cas échéant
          * 
          */
         public static User Get_User(String login = "", int id = 0)

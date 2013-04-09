@@ -27,8 +27,8 @@ namespace DB
         // Identifiant unique clé primaire de l'image cible
         private int id;
 
-        // Identifiant de l'utilisateur propriété clé étrangère
-        private int idUser;
+        // Identifiant de l'album contenant propriété clé étrangère
+        private int idAlbum;
 
         // Nom de l'image courante
         private string name;
@@ -39,32 +39,32 @@ namespace DB
         /** 
          * Constructeur normal d'une image
          * 
-         * @param idUser    : le nom de l'utilisateur propriétaire
+         * @param idAlbum   : le nom de l'album contenant
          * @param name      : le nom de l'image cible
          * @param img       : l'image cible sous forme d'un tableau de bytes
          * 
          */
-        public Img(int idUser, string name, byte[] img)
+        public Img(int idAlbum, string name, byte[] img)
         {
-            this.id = 0;
+            ;
             this.name = name;
-            this.idUser = idUser;
+            this.idAlbum = idAlbum;
             this.image = img;
         }
 
         /** 
          * Récupérer l'identifiant de l'image cible
          * 
-         * @param idUser    : le nom de l'utilisateur propriétaire
+         * @param idAlbum   : le nom de l'album contenant
          * @param name      : le nom de l'image cible
          * 
          * @return l'id de l'image si elle existe, -1 sinon
          * 
          */
-        public static int Get_Id(int idUser, string name)
+        public static int Get_Id(int idAlbum, string name)
         {
             int idImage = -1;
-            string req = "SELECT id FROM IMAGE WHERE name='" + name + "' AND idUser='" + idUser + "';";
+            string req = "SELECT id FROM IMAGE WHERE name='" + name + "' AND idUser='" + idAlbum + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -79,15 +79,15 @@ namespace DB
          * Récupérer le nom de l'image cible
          * 
          * @param id        : l'identifiant de l'image cible
-         * @param idUser    : le nom de l'utilisateur propriétaire
+         * @param idAlbum   : le nom de l'album contenant
          * 
          * @return le nom de l'image si elle existe, null sinon
          * 
          */
-        public static string Get_Name(int idUser, int id)
+        public static string Get_Name(int idAlbum, int id)
         {
             string name = null;
-            string req = "SELECT name FROM IMAGE WHERE id='" + id + "' AND idUser='" + idUser + "';";
+            string req = "SELECT name FROM IMAGE WHERE id='" + id + "' AND idUser='" + idAlbum + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -102,15 +102,15 @@ namespace DB
          * Récupérer une image
          * 
          * @param id        : l'identifiant de l'image cible
-         * @param idUser    : le nom de l'utilisateur propriétaire
+         * @param idAlbum   : le nom de l'album contenant
          * 
          * @return l'image si elle existe, null sinon
          * 
          */
-        public static byte[] Get_Image(int id, int idUser)
+        public static byte[] Get_Image(int id, int idAlbum)
         {
             byte[] blob = null;
-            String req = "SELECT size,image FROM IMAGE WHERE idUser = '" + idUser + "' AND id='" + id + "';";
+            String req = "SELECT size,image FROM IMAGE WHERE idUser = '" + idAlbum + "' AND id='" + id + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
 
             if (reader.Read())
@@ -132,9 +132,9 @@ namespace DB
         public bool Add()
         {
             bool flag = false;
-            if (Get_Id(idUser, name) == -1)
+            if (Get_Id(idAlbum, name) == -1)
             {
-                String req = "INSERT INTO IMAGE (idUser, name, size, image) " + "VALUES('" + idUser + "', '" + name + "', '" + image.Length + "', '" + image + "')";
+                String req = "INSERT INTO IMAGE (idAlbum, name, size, image) " + "VALUES('" + idAlbum + "', '" + name + "', '" + image.Length + "', '" + image + "')";
                 flag = Connexion.execute_Request(req);
             }
             return flag;
@@ -144,22 +144,22 @@ namespace DB
          * Supprimer une image de la Base De Données
          * 
          * @param id        : l'identifiant de l'image cible
-         * @param idUser    : l'identifiant de l'utilisateur propriétaire
+         * @param idAlbum   : l'identifiant de l'album contenant
          * 
          * @return true si l'image a bien été supprimée, false le cas échéant
          * 
          */
-        public static bool Delete(int id, int idUser)
+        public static bool Delete(int id, int idAlbum)
         {
             bool flag = false;
-            String req = "DELETE FROM IMAGE WHERE id = '" + id + "' AND idUser='" + idUser + "';";
+            String req = "DELETE FROM IMAGE WHERE id = '" + id + "' AND idUser='" + idAlbum + "';";
             flag = Connexion.execute_Request(req);
             return flag;
         }
 
         public override string ToString()
         {
-            return "{Image : \n n° = " + id + ", utilisateur = " + idUser + ", nom = " + name + ", taille = " + image.Length + "}";
+            return "{Image : \n n° = " + id + ", utilisateur = " + idAlbum + ", nom = " + name + ", taille = " + image.Length + "}";
         }
 
     }

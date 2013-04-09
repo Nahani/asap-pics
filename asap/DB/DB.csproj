@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs" />
     <Compile Include="Connexion.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="MD5_Actions.cs" />
