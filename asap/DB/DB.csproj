@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesBD_SQL.cs" />
     <Compile Include="Album.cs" />
     <Compile Include="Connexion.cs" />
     <Compile Include="Image.cs" />
+    <Compile Include="AccesBD.cs" />
     <Compile Include="MD5_Actions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

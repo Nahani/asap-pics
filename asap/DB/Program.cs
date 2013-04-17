@@ -10,9 +10,10 @@ namespace DB
         static void Main(string[] args)
         {
             User u = new User("a", "b", "c", "def", "abc", true);
-            u.Add();
-            Console.WriteLine(User.Check_password("c","def"));
-            Console.WriteLine(User.Check_password("c", "defg"));
+            AccesBD_SQL access = new AccesBD_SQL();
+            access.Add_User(u);
+            Console.WriteLine(access.Check_password("c","def"));
+            Console.WriteLine(access.Check_password("c", "defg"));
 
             /*Img.Delete(1, 3);
             Img i = new Img(3, "1234", new Byte[18]);
