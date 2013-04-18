@@ -17,10 +17,13 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
+using System.Data;
+using System.Drawing;
+using System.IO;
 
 namespace DB
 {
-    class User
+    public class User
     {
         private String first_name;
 

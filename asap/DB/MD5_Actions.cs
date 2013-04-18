@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace DB
 {
-    class MD5_Actions
+    public class MD5_Actions
     {
         public static string GetMd5Hash(MD5 md5Hash, string input)
         {

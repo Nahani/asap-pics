@@ -19,7 +19,7 @@ using System.Data.SqlClient;
 
 namespace DB
 {
-    class Album
+    public class Album
     {
         // Nom de l'album cible
         string name;

@@ -23,7 +23,6 @@ namespace DB
             MemoryStream ms = new MemoryStream();
             bmp1.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
             return ms.ToArray();
-
         }
 
         /** 

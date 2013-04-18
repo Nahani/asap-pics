@@ -23,7 +23,7 @@ using System.Security.Cryptography;
 
 namespace DB
 {
-    class AccesBD_SQL : AccesBD
+    public class AccesBD_SQL : AccesBD
     {
         /* Constructeur vide pour accéder à la base de données */
 
@@ -41,7 +41,7 @@ namespace DB
         public int Get_Id_Img(int idAlbum, string name)
         {
             int idImage = -1;
-            string req = "SELECT id FROM IMAGE WHERE name='" + name + "' AND idUser='" + idAlbum + "';";
+            string req = "SELECT id FROM IMAGE WHERE name='" + name + "' AND idAlbum='" + idAlbum + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -64,7 +64,7 @@ namespace DB
         public string Get_Name_Img(int idAlbum, int id)
         {
             string name = null;
-            string req = "SELECT name FROM IMAGE WHERE id='" + id + "' AND idUser='" + idAlbum + "';";
+            string req = "SELECT name FROM IMAGE WHERE id='" + id + "' AND idAlbum='" + idAlbum + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -87,7 +87,7 @@ namespace DB
         public byte[] Get_Image(int id, int idAlbum)
         {
             byte[] blob = null;
-            String req = "SELECT size,image FROM IMAGE WHERE idUser = '" + idAlbum + "' AND id='" + id + "';";
+            String req = "SELECT size,image FROM IMAGE WHERE idAlbum = '" + idAlbum + "' AND id='" + id + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
 
             if (reader.Read())
@@ -129,7 +129,7 @@ namespace DB
         public bool Delete_Img(int id, int idAlbum)
         {
             bool flag = false;
-            String req = "DELETE FROM IMAGE WHERE id = '" + id + "' AND idUser='" + idAlbum + "';";
+            String req = "DELETE FROM IMAGE WHERE id = '" + id + "' AND idAlbum='" + idAlbum + "';";
             flag = Connexion.execute_Request(req);
             return flag;
         }

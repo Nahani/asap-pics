@@ -13,12 +13,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
-
-
 namespace DB
 {
-    interface AccesBD
+    public interface AccesBD
     {
         int Get_Id_Img(int idAlbum, string name);
 
