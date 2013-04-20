@@ -25,11 +25,24 @@ namespace DB
 {
     public class AccesBD_SQL : AccesBD
     {
-        /* Constructeur vide pour accéder à la base de données */
 
-        public AccesBD_SQL() { }
+        private static AccesBD_SQL instance;
 
-        /** 
+        private AccesBD_SQL() { }
+
+        public static AccesBD_SQL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AccesBD_SQL();
+                }
+                return instance;
+            }
+        }
+
+        /* 
          * Récupérer l'identifiant de l'image cible
          * 
          * @param idAlbum   : le nom de l'album contenant
@@ -52,7 +65,7 @@ namespace DB
             return idImage;
         }
 
-        /** 
+        /* 
          * Récupérer le nom de l'image cible
          * 
          * @param id        : l'identifiant de l'image cible
@@ -75,7 +88,7 @@ namespace DB
             return name;
         }
 
-        /** 
+        /* 
          * Récupérer une image
          * 
          * @param id        : l'identifiant de l'image cible
@@ -154,6 +167,14 @@ namespace DB
             return a;
         }
 
+        /*
+         * Obtenir une liste d'albums appartenant à un utilisateur cible
+         * 
+         * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
+         * 
+         * @return la liste d'albums s'ils ont bien été récupérés, null le cas échéant
+         * 
+         */
         public List<Album> Get_Albums_From_User(int idUser)
         {
             String req = "SELECT nom, id FROM ALBUM WHERE idUser='" + idUser + "';";
@@ -163,6 +184,31 @@ namespace DB
                 result.Add(new Album(reader.GetString(0), reader.GetInt32(1)));
             Connexion.close();
             return result;
+        }
+
+
+        /* 
+         * Récupérer l'identifiant de l'l'album
+         * 
+         * @param name    : le nom de l'album cible
+         * @param idProp  : l'identifiant de l'utilisateur cible
+         * 
+         * @return l'identifiant de l'album si il existe, -1 le cas échéant
+         * 
+         */
+        public int Get_Id_Album(string name, int idProp)
+        {
+            int idUser = -1;
+            string req = "SELECT id FROM ALBUM WHERE name='" + name + "' AND idProp = '" + idProp  + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+            while (reader.Read())
+            {
+                // Récupérer la colonne 0 (id) de la table formée par la requête précitée 
+                idUser = reader.GetInt32(0);
+            }
+            Connexion.close();
+            return idUser;
+
         }
 
         /*
@@ -186,7 +232,7 @@ namespace DB
             return exists;
         }
 
-        /*
+       /*
         * Ajouter un album dans la Base De Données
         * 
         * @return true si l'album a bien été ajouté, false le cas échéant
@@ -204,20 +250,21 @@ namespace DB
         /*
          * Supprimer un album de la Base De Données
          * 
-         * @param  : l'identifiant de l'album cible
+         * @param idProp  : l'identifiant du propriétaire cible
+         * @param name  : le nom de l'album cible
          * 
          * @return true si l'album a bien été supprimé, false le cas échéant
          * 
          */
-        public bool Delete_Album(int id)
+        public bool Delete_Album(int idProp, string name)
         {
             bool flag = false;
-            String req = "DELETE FROM ALBUM WHERE id = '" + id + "';";
+            String req = "DELETE FROM ALBUM WHERE idProp = '" + idProp + "' AND name = '" + name + "';";
             flag = Connexion.execute_Request(req);
             return flag;
         }
 
-        /** 
+        /*
          * Récupérer l'identifiant de l'utilisateur
          * 
          * @param login    : le login de l'utilisateur cible
@@ -240,7 +287,7 @@ namespace DB
 
         }
 
-        /** 
+        /*
          * Vérifier si un login est déjà existant
          * 
          * @param login    : le login de l'utilisateur cible

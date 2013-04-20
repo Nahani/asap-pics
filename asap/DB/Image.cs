@@ -60,7 +60,7 @@ namespace DB
             set { image = value; }
         }
 
-        /** 
+        /* 
          * Constructeur normal d'une image
          * 
          * @param idAlbum   : le nom de l'album contenant

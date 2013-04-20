@@ -31,11 +31,13 @@ namespace DB
 
         List<Album> Get_Albums_From_User(int idUser);
 
+        int Get_Id_Album(string name, int idProp);
+
         bool Exists_Album(int id);
 
         bool Add_Album(Album al);
 
-        bool Delete_Album(int id);
+        bool Delete_Album( int idProp, string name);
 
         int Get_Id_User(string login);
 

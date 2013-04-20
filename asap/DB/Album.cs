@@ -42,8 +42,8 @@ namespace DB
         /*
          * Constructeur normal d'un album
          * 
-         * @name  : Nom de l'album cible
-         * @idUser   : Identifiant de l'utilisateur propriétaire de l'albumcible 
+         * @param name  : Nom de l'album cible
+         * @param idUser   : Identifiant de l'utilisateur propriétaire de l'albumcible 
          * 
          */
         public Album(string name, int idUser)

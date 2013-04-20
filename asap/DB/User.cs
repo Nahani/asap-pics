@@ -73,16 +73,15 @@ namespace DB
             set { level = value; }
         }
 
-
         /*
          * Constructeur normal d'un utilisateur
          * 
-         * @first_name  : Nom de l'utilisateur cible
-         * @last_name   : Prénom de l'utilisateur cible 
-         * @login       : Login de l'utilisateur cible
-         * @password    : Mot de Passe de l'utilisateur cible
-         * @mail        : Adresse email de l'utilisateur cible
-         * @level       : Niveau d'autoritsation de l'utilisateur cible :
+         * @param first_name  : Nom de l'utilisateur cible
+         * @param last_name   : Prénom de l'utilisateur cible 
+         * @param login       : Login de l'utilisateur cible
+         * @param password    : Mot de Passe de l'utilisateur cible
+         * @param mail        : Adresse email de l'utilisateur cible
+         * @param level       : Niveau d'autoritsation de l'utilisateur cible :
          *                  - false : utilisateur classique 
          *                  - true  : administrateur
          * 
