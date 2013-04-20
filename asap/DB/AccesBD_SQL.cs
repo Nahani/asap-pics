@@ -124,7 +124,17 @@ namespace DB
             bool flag = false;
             if (Get_Id_Img(im.IdAlbum, im.Name) == -1)
             {
-                String req = "INSERT INTO IMAGE (idAlbum, name, size, image) " + "VALUES('" + im.IdAlbum + "', '" + im.Name + "', '" + im.Image.Length + "', '" + im.Image + "')";
+                SqlCommand req = new SqlCommand(
+               "INSERT INTO IMAGE (idAlbum, name,  size, image) " +
+               "VALUES(@idAlbum, @name, @size, @image)", Connexion.Connection);
+                req.Parameters.Add("@idAlbum", SqlDbType.Int).Value
+                = im.IdAlbum;
+                req.Parameters.Add("@name", SqlDbType.NChar, im.Name.Length).Value
+               = im.Name;
+                req.Parameters.Add("@size", SqlDbType.Int).Value = im.Image.Length;
+                req.Parameters.Add("@image", SqlDbType.Image, im.Image.Length).Value
+                = im.Image;
+                
                 flag = Connexion.execute_Request(req);
             }
             return flag;

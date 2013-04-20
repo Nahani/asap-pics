@@ -23,7 +23,7 @@ namespace DB
     public class Connexion
     {
         // Information relatives à la connexion à la base de données éponyme
-        static string info = "Server=YXXX\\SQLEXPRESS;Database=PICASA;Integrated Security=true;";
+        static string info = "Server=POTIER\\SQLEXPRESS;Database=PICASA;Integrated Security=true;";
 
         // Objet de connexion en lien direct avec la base de données
         static SqlConnection connection;
@@ -77,6 +77,22 @@ namespace DB
             open();
             int result = new SqlCommand(str, connection).ExecuteNonQuery();
             close();
+            return Convert.ToBoolean(result);
+        }
+
+        /*
+         * Executer la requête cible
+         * 
+         * @param str   : la chaîne de requête courante
+         *
+         * @return true si l'opération s'est bien passée, faux le cas échéant
+         *
+         */
+        static public bool execute_Request(SqlCommand str)
+        {
+            str.Connection.Open();
+            int result = str.ExecuteNonQuery();
+            str.Connection.Close();
             return Convert.ToBoolean(result);
         }
 
