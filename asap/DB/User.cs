@@ -96,7 +96,7 @@ namespace DB
             this.level = level;
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             return "{Utilisateur = " + first_name + ", " + last_name + ", " + login + ", " + password + ", " + mail + ", " + level + "}";
         }

@@ -22,9 +22,9 @@ namespace DB
     public class Album
     {
         // Nom de l'album cible
-        string name;
+        String name;
 
-        public string Name
+        public String Name
         {
             get { return name; }
             set { name = value; }
@@ -46,13 +46,13 @@ namespace DB
          * @param idUser   : Identifiant de l'utilisateur propriétaire de l'albumcible 
          * 
          */
-        public Album(string name, int idUser)
+        public Album(String name, int idUser)
         {
             this.name = name;
             this.idUser = idUser;
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             return "{Album = " + name + ", " + idUser + "}";
         }

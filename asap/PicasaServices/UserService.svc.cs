@@ -13,17 +13,17 @@ namespace WcfService
             return dataAccess.Add_User(new User(first_name, last_name, login, pwd, mail, level));
         }
 
-        public bool Delete(string login)
+        public bool Delete(String login)
         {
             return dataAccess.Delete_User(login);
         }
 
-        User Get_User(string login)
+        public User Get_User(String login)
         {
             return dataAccess.Get_User(login);
         }
 
-        bool Check_password(string login, string pwd)
+        public bool Check_password(String login, String pwd)
         {
             return dataAccess.Check_password(login, pwd);
         }

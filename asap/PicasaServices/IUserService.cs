@@ -38,7 +38,7 @@ namespace WcfService
          * @return true si l'utilisateur a bien été ajouté, false le cas échéant
          */
         [OperationContract]
-        bool Add(String first_name, String last_name, String login, String mail, String pwd);
+        bool Add(String first_name, String last_name, String login, String mail, String pwd, bool level);
 
         /*
          * Supprimer un utilisateur de la Base De Données
@@ -60,7 +60,7 @@ namespace WcfService
          * 
          */
         [OperationContract]
-        User Get_User(string login);
+        User Get_User(String login);
 
        /*
         * Vérifier la validité d'un mot de passe
@@ -72,7 +72,7 @@ namespace WcfService
         * 
         */
         [OperationContract]
-        bool Check_password(string login, string pwd);
+        bool Check_password(String login, String pwd);
 
         /* 
          * Récupérer l'identifiant de l'utilisateur

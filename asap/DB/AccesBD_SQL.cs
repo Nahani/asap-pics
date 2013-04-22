@@ -51,10 +51,10 @@ namespace DB
          * @return l'id de l'image si elle existe, -1 sinon
          * 
          */
-        public int Get_Id_Img(int idAlbum, string name)
+        public int Get_Id_Img(int idAlbum, String name)
         {
             int idImage = -1;
-            string req = "SELECT id FROM IMAGE WHERE name='" + name + "' AND idAlbum='" + idAlbum + "';";
+            String req = "SELECT id FROM IMAGE WHERE name='" + name + "' AND idAlbum='" + idAlbum + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -74,10 +74,10 @@ namespace DB
          * @return le nom de l'image si elle existe, null sinon
          * 
          */
-        public string Get_Name_Img(int idAlbum, int id)
+        public String Get_Name_Img(int idAlbum, int id)
         {
-            string name = null;
-            string req = "SELECT name FROM IMAGE WHERE id='" + id + "' AND idAlbum='" + idAlbum + "';";
+            String name = null;
+            String req = "SELECT name FROM IMAGE WHERE id='" + id + "' AND idAlbum='" + idAlbum + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -206,10 +206,10 @@ namespace DB
          * @return l'identifiant de l'album si il existe, -1 le cas échéant
          * 
          */
-        public int Get_Id_Album(string name, int idProp)
+        public int Get_Id_Album(String name, int idProp)
         {
             int idUser = -1;
-            string req = "SELECT id FROM ALBUM WHERE name='" + name + "' AND idProp = '" + idProp  + "';";
+            String req = "SELECT id FROM ALBUM WHERE name='" + name + "' AND idProp = '" + idProp  + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -266,7 +266,7 @@ namespace DB
          * @return true si l'album a bien été supprimé, false le cas échéant
          * 
          */
-        public bool Delete_Album(int idProp, string name)
+        public bool Delete_Album(int idProp, String name)
         {
             bool flag = false;
             String req = "DELETE FROM ALBUM WHERE idProp = '" + idProp + "' AND name = '" + name + "';";
@@ -282,10 +282,10 @@ namespace DB
          * @return l'identifiant de l'utlisateur si il existe, -1 le cas échéant
          * 
          */
-        public int Get_Id_User(string login)
+        public int Get_Id_User(String login)
         {
             int idUser = -1;
-            string req = "SELECT id FROM USERS WHERE login='" + login + "';";
+            String req = "SELECT id FROM USERS WHERE login='" + login + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -305,7 +305,7 @@ namespace DB
          * @return true si l'utilisateur cible existe, false le cas échéant
          * 
          */
-        public bool Exists_User(string login)
+        public bool Exists_User(String login)
         {
             String req = "SELECT * FROM USERS WHERE login='" + login + "'";
             SqlDataReader reader = Connexion.execute_Select(req);
@@ -343,7 +343,7 @@ namespace DB
          * @return true si l'utilisateur a bien été supprimé, false le cas échéant
          * 
          */
-        public bool Delete_User(string login)
+        public bool Delete_User(String login)
         {
             bool flag = false;
             String req = "DELETE FROM USERS WHERE login = '" + login + "';";
@@ -390,7 +390,7 @@ namespace DB
          * @return true si le mot de passe est correct, false le cas échéant
          * 
          */
-        public bool Check_password(string login, string password)
+        public bool Check_password(String login, String password)
         {
             String req = "SELECT password FROM USERS WHERE login='" + login + "'";
             SqlDataReader reader = Connexion.execute_Select(req);

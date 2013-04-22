@@ -17,9 +17,9 @@ namespace DB
 {
     public interface AccesBD
     {
-        int Get_Id_Img(int idAlbum, string name);
+        int Get_Id_Img(int idAlbum, String name);
 
-        string Get_Name_Img(int idAlbum, int id);
+        String Get_Name_Img(int idAlbum, int id);
 
         byte[] Get_Image(int id, int idAlbum);
 
@@ -31,25 +31,25 @@ namespace DB
 
         List<Album> Get_Albums_From_User(int idUser);
 
-        int Get_Id_Album(string name, int idProp);
+        int Get_Id_Album(String name, int idProp);
 
         bool Exists_Album(int id);
 
         bool Add_Album(Album al);
 
-        bool Delete_Album( int idProp, string name);
+        bool Delete_Album( int idProp, String name);
 
-        int Get_Id_User(string login);
+        int Get_Id_User(String login);
 
-        bool Exists_User(string login);
+        bool Exists_User(String login);
 
         bool Add_User(User us);
 
-        bool Delete_User(string login);
+        bool Delete_User(String login);
 
         User Get_User(String login, int id);
 
-        bool Check_password(string login, string password);
+        bool Check_password(String login, String password);
 
     }
 }

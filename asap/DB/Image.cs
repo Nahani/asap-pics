@@ -43,9 +43,9 @@ namespace DB
         }
 
         // Nom de l'image courante
-        private string name;
+        private String name;
 
-        public string Name
+        public String Name
         {
             get { return name; }
             set { name = value; }
@@ -68,7 +68,7 @@ namespace DB
          * @param img       : l'image cible sous forme d'un tableau de bytes
          * 
          */
-        public Img(int idAlbum, string name, byte[] img)
+        public Img(int idAlbum, String name, byte[] img)
         {
             ;
             this.name = name;
@@ -77,7 +77,7 @@ namespace DB
         }
 
 
-        public override string ToString()
+        public override String ToString()
         {
             return "{Image : \n n° = " + id + ", utilisateur = " + idAlbum + ", nom = " + name + ", taille = " + image.Length + "}";
         }
