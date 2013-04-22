@@ -209,7 +209,7 @@ namespace DB
         public int Get_Id_Album(String name, int idProp)
         {
             int idUser = -1;
-            String req = "SELECT id FROM ALBUM WHERE name='" + name + "' AND idProp = '" + idProp  + "';";
+            String req = "SELECT id FROM ALBUM WHERE name='" + name + "' AND idUser = '" + idProp  + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -250,9 +250,28 @@ namespace DB
         */
         public bool Add_Album(Album al)
         {
+            /*
             bool flag = false;
-            String req = "INSERT INTO ALBUM (name, date, idUser) VALUES ('" + al.Name + "','" + DateTime.Now + "','" + al.IdUser + "');";
+            String req = "INSERT INTO ALBUM (name, date, idUser) VALUES ('" + al.Name + "','" + Convert.ToString(DateTime.Now) + "','" + al.IdUser + "');";
             flag = Connexion.execute_Request(req);
+            return flag;
+             */
+
+            bool flag = false;
+            if (Get_Id_Album(al.Name, al.IdUser) == -1)
+            {
+                SqlCommand req = new SqlCommand(
+               "INSERT INTO ALBUM (name, date, idUser) " +
+               "VALUES(@name, @date, @idUser)", Connexion.Connection);
+                req.Parameters.Add("@name", SqlDbType.NChar, al.Name.Length).Value
+                = al.Name;
+                req.Parameters.Add("@date", SqlDbType.Date).Value
+               = DateTime.Now;
+                req.Parameters.Add("@idUser", SqlDbType.Int).Value = al.IdUser;
+
+
+                flag = Connexion.execute_Request(req);
+            }
             return flag;
         }
 

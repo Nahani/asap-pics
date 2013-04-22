@@ -9,12 +9,23 @@ namespace DB
     {
         static void Main(string[] args)
         {
-            /*User u = new User("a", "b", "c", "def", "abc", true);
-            AccesBD_SQL access = new AccesBD_SQL();
-            access.Add_User(u);
-            Console.WriteLine(access.Check_password("c","def"));
-            Console.WriteLine(access.Check_password("c", "defg"));
+            /*
+            User u = new User("a", "b", "c", "def", "abc", true);
+            Console.WriteLine("bonjour");
+            AccesBD_SQL access = AccesBD_SQL.Instance;
+            Console.WriteLine("bonjour");
+            
+            Album monAlb = new Album("test",access.Get_Id_User("c"));
+            Console.WriteLine("bonjour");
+            access.Add_Album(monAlb);
+            Console.WriteLine("bonjour");
+            Img monImage = new Img(access.Get_Id_Album("test",access.Get_Id_User("c")),"rose",Image_Actions.getImageByte(@"C:\Users\user\Desktop\peachRobe.jpg"));
+            Console.WriteLine("bonjour");
+            access.Add_Img(monImage);
+            Console.WriteLine("bonjour");
 
+
+            
             Img.Delete(1, 3);
             Img i = new Img(3, "1234", new Byte[18]);
             if(!i.Add())
