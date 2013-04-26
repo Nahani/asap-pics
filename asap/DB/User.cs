@@ -20,11 +20,14 @@ using System.Security.Cryptography;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace DB
 {
+    [Serializable]
     public class User
     {
+
         private String first_name;
 
         public String First_name

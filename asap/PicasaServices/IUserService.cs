@@ -51,17 +51,6 @@ namespace WcfService
         [OperationContract]
         bool Delete(String login);
 
-        /*
-         * Obtenir un utilisateur selon son login 
-         * 
-         * @param login : le login de l'utilisateur cible
-         * 
-         * @return l'utilisateur s'il a bien été récupéré, null le cas échéant
-         * 
-         */
-        [OperationContract]
-        User Get_User(String login);
-
        /*
         * Vérifier la validité d'un mot de passe
         * 
@@ -84,5 +73,19 @@ namespace WcfService
          */
         [OperationContract]
         int Get_User_ID(String login);
+
+        /* 
+         * Récupérer le niveau d'autorisation de l'utilisateur
+         * 
+         * @param login    : le login de l'utilisateur cible
+         * 
+         * @return true si l'utilisateur est un administrateur, false le cas échéant
+         * 
+         */
+        [OperationContract]
+        bool Get_User_Level(String login);
+
+        [OperationContract]
+        User Get_User(String login);
     }
 }

@@ -19,6 +19,7 @@ using System.Data.SqlClient;
 
 namespace DB
 {
+    [Serializable]
     public class Album
     {
         // Nom de l'album cible

@@ -22,6 +22,7 @@ using System.IO;
 
 namespace DB
 {
+    [Serializable]
     public class Img
     {
         // Identifiant unique clé primaire de l'image cible
