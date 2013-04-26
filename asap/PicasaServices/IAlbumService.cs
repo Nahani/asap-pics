@@ -12,11 +12,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using DB;
+using System.ServiceModel;
 
 namespace PicasaServices
 {
@@ -55,9 +52,9 @@ namespace PicasaServices
          * @return la liste d'albums s'ils ont bien été récupérés, null le cas échéant
          * 
          */
-        [OperationContract]
+       /* [OperationContract]
         List<Album> Get_Albums_From_User(int idProp);
-
+        */
         /* 
          * Récupérer l'identifiant de l'l'album
          * 

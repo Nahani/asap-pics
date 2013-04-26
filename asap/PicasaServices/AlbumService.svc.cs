@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using DB;
 
 namespace PicasaServices
@@ -22,10 +18,10 @@ namespace PicasaServices
             return dataAccess.Delete_Album(idProp, name);
         }
 
-        public List<Album> Get_Albums_From_User(int idProp)
+        /*public List<Album> Get_Albums_From_User(int idProp)
         {
             return dataAccess.Get_Albums_From_User(idProp);
-        }
+        }*/
 
         public int Get_Album_ID(String name, int idProp)
         {
