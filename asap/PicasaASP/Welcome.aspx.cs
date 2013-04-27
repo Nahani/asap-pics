@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PicasaASP.User_Service;
 
 namespace PicasaASP
 {
     public partial class Welcome : System.Web.UI.Page
     {
-
-        public static PicasaASP.ServiceReference1.UserServiceClient user_client = new PicasaASP.ServiceReference1.UserServiceClient();
+        public static UserServiceClient user_client = new UserServiceClient();
 
         protected void Login_Click(object sender, EventArgs e)
         {
@@ -25,7 +25,7 @@ namespace PicasaASP
             {
                 id = user_client.Get_User_ID(login);
                 Session["id"] = id;
-                Response.Redirect("Albums.aspx");
+                Response.Redirect("Overview.aspx");
             }
 
         }

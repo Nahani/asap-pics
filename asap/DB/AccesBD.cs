@@ -23,6 +23,10 @@ namespace DB
 
         byte[] Get_Image(int id, int idAlbum);
 
+        List<byte[]> Get_Image_From_Albums(int idAlbum);
+        
+        List<int> Get_Image_ID_From_Albums(int idAlbum);
+
         bool Add_Img(Img im);
 
         bool Delete_Img(int id, int idAlbum);

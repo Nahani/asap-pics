@@ -113,6 +113,53 @@ namespace DB
             return blob;
         }
 
+        /* 
+         * Récupérer toutes les images d'un album
+         * 
+         * @param idAlbum   : le nom de l'album contenant
+         * 
+         * @return les images si l'album n'esgt pas vide, null sinon
+         * 
+         */
+        public List<byte[]> Get_Image_From_Albums(int idAlbum)
+        {
+            List<byte[]> blobs = new List<byte[]>();
+            String req = "SELECT size,image FROM IMAGE WHERE idAlbum = '" + idAlbum + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+
+            while (reader.Read())
+            {
+                int size = reader.GetInt32(0);
+                byte[] blob = new byte[size];
+                reader.GetBytes(1, 0, blob, 0, size);
+                blobs.Add(blob);
+            }
+            Connexion.close();
+            return blobs;
+        }
+
+        /* 
+         * Récupérer tous les identifiants des images d'un album
+         * 
+         * @param idAlbum   : le nom de l'album contenant
+         * 
+         * @return les images si l'album n'esgt pas vide, null sinon
+         * 
+         */
+        public List<int> Get_Image_ID_From_Albums(int idAlbum)
+        {
+            List<int> ids = new List<int>(); ;
+            String req = "SELECT id FROM IMAGE WHERE idAlbum = '" + idAlbum + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+
+            while (reader.Read())
+            {
+                ids.Add(reader.GetInt32(0));
+            }
+            Connexion.close();
+            return ids;
+        }
+
         /*
          * Ajouter une image dans la Base De Données
          * 

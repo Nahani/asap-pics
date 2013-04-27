@@ -14,6 +14,7 @@ using System;
 using System.ServiceModel;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace PicasaServices
 {
@@ -81,6 +82,28 @@ namespace PicasaServices
          */
         [OperationContract]
         int Get_Image_ID(int idAlbum, string name);
+
+        /* 
+         * Récupérer toutes les images d'un album
+         * 
+         * @param idAlbum   : le nom de l'album contenant
+         * 
+         * @return la liste des images si elles existent, null sinon
+         * 
+         */
+        [OperationContract]
+        List<ImageDownloadResponse> Get_Images_From_Album(int idAlbum);
+
+        /* 
+         * Récupérer tous les identififiants d'images d'un album
+         * 
+         * @param idAlbum   : le nom de l'album contenant
+         * 
+         * @return la liste des images si elles existent, null sinon
+         * 
+         */
+        [OperationContract]
+        List<int> Get_Images_ID_From_Album(int idAlbum);
     }
 
 
