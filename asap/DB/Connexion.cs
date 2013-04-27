@@ -23,7 +23,7 @@ namespace DB
     public class Connexion
     {
         // Information relatives à la connexion à la base de données éponyme
-        static String info = "Server=YXXX\\SQLEXPRESS;Database=PICASA;Integrated Security=true;";
+        static String info = "Server=" + System.Environment.MachineName +"\\SQLEXPRESS;Database=PICASA;Integrated Security=true;";
 
         // Objet de connexion en lien direct avec la base de données
         static SqlConnection connection;

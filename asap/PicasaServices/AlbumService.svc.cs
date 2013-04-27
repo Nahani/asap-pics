@@ -18,16 +18,17 @@ namespace PicasaServices
             return dataAccess.Delete_Album(idProp, name);
         }
 
-        /*public List<Album> Get_Albums_From_User(int idProp)
-        {
-            return dataAccess.Get_Albums_From_User(idProp);
-        }*/
-
         public int Get_Album_ID(String name, int idProp)
         {
             return dataAccess.Get_Id_Album(name, idProp);
         }
-
+        
+        public AlbumsResponse Get_Albums_From_User(int idProp)
+        {
+            AlbumsResponse resp = new AlbumsResponse();
+            resp.Albums = dataAccess.Get_Albums_From_User(idProp);
+            return resp;
+        }
 
 
     }

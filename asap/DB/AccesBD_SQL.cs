@@ -187,11 +187,11 @@ namespace DB
          */
         public List<Album> Get_Albums_From_User(int idUser)
         {
-            String req = "SELECT nom, id FROM ALBUM WHERE idUser='" + idUser + "';";
+            String req = "SELECT name FROM ALBUM WHERE idUser='" + idUser + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
-            List<Album> result = null;
+            List<Album> result = new List<Album>();
             while (reader.Read())
-                result.Add(new Album(reader.GetString(0), reader.GetInt32(1)));
+                result.Add(new Album(reader.GetString(0), idUser));
             Connexion.close();
             return result;
         }
