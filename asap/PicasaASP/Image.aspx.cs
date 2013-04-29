@@ -36,7 +36,6 @@ namespace PicasaASP
             Response.BinaryWrite(bytes);
             Response.Flush();
             Response.End();
-
         }
 
         protected byte[] GetBytes(Stream img)
