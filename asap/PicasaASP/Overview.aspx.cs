@@ -42,10 +42,10 @@ namespace PicasaASP
                 int currentAlbumId = album_client.Get_Album_ID(a.name, currentId);
                 int[] tmp = image_client.Get_Images_ID_From_Album(currentAlbumId);
                 Random r = new Random();
-                int idVignette = 1;//r.Next(tmp);
+                int idVignette = r.Next(tmp.Length);
                 Panel p = new Panel();
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
-                img.ImageUrl = "Image.aspx?id=" + idVignette + "&idAlbum=" + currentAlbumId;
+                img.ImageUrl = "Image.aspx?id=" + tmp[idVignette] + "&idAlbum=" + currentAlbumId;
                 img.Width = 150;
                 p.Controls.Add(img);
                 p.Controls.Add(b);
