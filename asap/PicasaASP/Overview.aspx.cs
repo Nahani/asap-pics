@@ -34,21 +34,25 @@ namespace PicasaASP
             {
                 Button b = new Button();
                 b.Click += new EventHandler(this.View_Album);
+/*
+                b.Text = a.name; 
+                ImageDownloadFromAlbumResponse tmp = image_client.Get_Images_From_Album(album_client.Get_Album_ID(a.name, currentId));
+*/
                 b.Text = a.name;
                 int currentAlbumId = album_client.Get_Album_ID(a.name, currentId);
                 int[] tmp = image_client.Get_Images_ID_From_Album(currentAlbumId);
                 Random r = new Random();
-                int idVignette = r.Next(tmp.Length) ;
+                int idVignette = 1;//r.Next(tmp);
                 Panel p = new Panel();
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
-                img.ImageUrl = "Image.aspx?id=" + idVignette;
+                img.ImageUrl = "Image.aspx?id=" + idVignette + "&idAlbum=" + currentAlbumId;
                 img.Width = 150;
                 p.Controls.Add(img);
                 p.Controls.Add(b);
                 albums.Controls.Add(p);
             }
 
-            AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
+           /* AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
 
             foreach (Album a in otherAlbums.Albums)
             {
@@ -66,7 +70,7 @@ namespace PicasaASP
                 p.Controls.Add(img);
                 p.Controls.Add(b);
                 albumsVisu.Controls.Add(p);
-            }
+            }*/
         }
 
         protected void View_Album(object sender, EventArgs e)
@@ -77,7 +81,7 @@ namespace PicasaASP
             foreach (int id in ids)
             {
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
-                img.ImageUrl = "Image.aspx?id=" + id;
+                img.ImageUrl = "Image.aspx?id=" + id + "&idAlbum=" + currentAlbumId;
                 img.Width = 250;
                 images.Controls.Add(img);
             }

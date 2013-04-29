@@ -22,9 +22,10 @@ namespace PicasaASP
             int id = Int32.Parse(Request.QueryString["id"]);
 
             ImageInfo iinfo = new ImageInfo();
-            iinfo.ID = (int)Session["id"];
+            iinfo.ID = id;
+            iinfo.Album = Int32.Parse(Request.QueryString["idAlbum"]);
             iinfo.Name = image_client.Get_Image_Name(iinfo.ID, id);
-
+            
             // on récupére notre image là où il faut
             Byte[] bytes = GetBytes(image_client.Get_Image(iinfo));
             // et on crée le contenu de notre réponse à la requête HTTP
