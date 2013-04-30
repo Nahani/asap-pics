@@ -445,7 +445,7 @@ namespace DB
          * @return l'utilisateur s'il a bien été récupéré, null le cas échéant
          * 
          */
-        public User Get_User(String login = "", int id = 0)
+        public User Get_User(String login = null, int id = 0)
         {
             String req = null;
             User targeted_user = null;
@@ -453,7 +453,7 @@ namespace DB
             {
                 req = "SELECT * FROM USERS WHERE id='" + id + "'";
             }
-            if (!login.Equals(null))
+            else if (!login.Equals(null))
             {
                 req = "SELECT * FROM USERS WHERE login='" + login + "'";
             }

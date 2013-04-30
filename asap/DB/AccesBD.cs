@@ -51,7 +51,7 @@ namespace DB
 
         bool Delete_User(String login);
 
-        User Get_User(String login, int id);
+        User Get_User(String login = null, int id = 0);
 
         bool Check_password(String login, String password);
 
