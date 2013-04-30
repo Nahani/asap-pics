@@ -88,6 +88,25 @@ namespace DB
             return name;
         }
 
+        /*
+	         * Obtenir une liste d'albums appartenant n'apparenant pas à l'utilisateur cible
+         *
+         * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
+	         *
+         * @return la liste d'albums s'ils ont bien été récupérés, null le cas échéant
+         *
+         */
+        public List<Album> Get_Albums_From_Other_Users(int idUser)
+        {
+            String req = "SELECT name FROM ALBUM WHERE idUser <> '" + idUser + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+            List<Album> result = new List<Album>();
+            while (reader.Read())
+                result.Add(new Album(reader.GetString(0), idUser));
+            Connexion.close();
+            return result;
+        }
+
         /* 
          * Récupérer une image
          * 
@@ -181,7 +200,7 @@ namespace DB
                 req.Parameters.Add("@size", SqlDbType.Int).Value = im.Image.Length;
                 req.Parameters.Add("@image", SqlDbType.Image, im.Image.Length).Value
                 = im.Image;
-                
+
                 flag = Connexion.execute_Request(req);
             }
             return flag;
@@ -256,7 +275,7 @@ namespace DB
         public int Get_Id_Album(String name, int idProp)
         {
             int idUser = -1;
-            String req = "SELECT id FROM ALBUM WHERE name='" + name + "' AND idUser = '" + idProp  + "';";
+            String req = "SELECT id FROM ALBUM WHERE name='" + name + "' AND idUser = '" + idProp + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             while (reader.Read())
             {
@@ -289,12 +308,12 @@ namespace DB
             return exists;
         }
 
-       /*
-        * Ajouter un album dans la Base De Données
-        * 
-        * @return true si l'album a bien été ajouté, false le cas échéant
-        * 
-        */
+        /*
+         * Ajouter un album dans la Base De Données
+         * 
+         * @return true si l'album a bien été ajouté, false le cas échéant
+         * 
+         */
         public bool Add_Album(Album al)
         {
             /*
