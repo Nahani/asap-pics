@@ -48,13 +48,24 @@ namespace PicasaServices
         /*
          * Obtenir une liste d'albums appartenant à un utilisateur cible
          * 
-         * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
+         * @param idProp    : l'identifiant de l'utilisateur propriétaire des albums cibles
          * 
          * @return la liste d'albums s'ils ont bien été récupérés, null le cas échéant
          * 
          */
         [OperationContract]
         AlbumsResponse Get_Albums_From_User(int idProp);
+
+        /*
+         * Obtenir une liste d'albums appartenant à tout les autres utilisateurs cible
+         * 
+         * @param idProp    : l'identifiant de l'utilisateur propriétaire à exclure des albums cibles
+         * 
+         * @return la liste d'albums s'ils ont bien été récupérés, null le cas échéant
+         * 
+         */
+        [OperationContract]
+        AlbumsResponse Get_Albums_From_Other_Users(int idProp);
         
         /* 
          * Récupérer l'identifiant de l'l'album

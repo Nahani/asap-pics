@@ -30,6 +30,13 @@ namespace PicasaServices
             return resp;
         }
 
+        public AlbumsResponse Get_Albums_From_Other_Users(int idProp)
+        {
+            AlbumsResponse resp = new AlbumsResponse();
+            resp.Albums = dataAccess.Get_Albums_From_Other_Users(idProp);
+            return resp;
+        }
+
 
     }
 }

@@ -104,6 +104,7 @@ namespace PicasaServices
          */
         [OperationContract]
         List<int> Get_Images_ID_From_Album(int idAlbum);
+
     }
 
 
