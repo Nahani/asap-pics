@@ -98,11 +98,11 @@ namespace DB
          */
         public List<Album> Get_Albums_From_Other_Users(int idUser)
         {
-            String req = "SELECT name FROM ALBUM WHERE idUser <> '" + idUser + "';";
+            String req = "SELECT name,idUser FROM ALBUM WHERE idUser <> '" + idUser + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
             List<Album> result = new List<Album>();
             while (reader.Read())
-                result.Add(new Album(reader.GetString(0), idUser));
+                result.Add(new Album(reader.GetString(0), reader.GetInt32(1)));
             Connexion.close();
             return result;
         }
