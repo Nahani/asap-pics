@@ -243,6 +243,25 @@ namespace DB
             return result;
         }
 
+        /*
+         * Obtenir une liste d'albums appartenant n'apparenant pas à l'utilisateur cible
+         * 
+         * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
+         * 
+         * @return la liste d'albums s'ils ont bien été récupérés, null le cas échéant
+         * 
+         */
+        public List<Album> Get_Albums_From_Other_Users(int idUser)
+        {
+            String req = "SELECT name FROM ALBUM WHERE idUser <> '" + idUser + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+            List<Album> result = new List<Album>();
+            while (reader.Read())
+                result.Add(new Album(reader.GetString(0), idUser));
+            Connexion.close();
+            return result;
+        }
+
 
         /* 
          * Récupérer l'identifiant de l'l'album
