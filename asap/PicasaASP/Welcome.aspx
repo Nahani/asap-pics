@@ -21,7 +21,7 @@
             <h1 style="text-align: center;" id="title">
                 Authentification</h1>
             <br />
-            <asp:Label Style="color: Red;" ID="reponse" runat="server"> </asp:Label>
+            <h1 runat="server"  style="color: Red; text-align: center;" ID="reponse" runat="server"> </h1>
             <br />
             <br />
             <table style="margin: 0 auto;">

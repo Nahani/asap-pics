@@ -22,7 +22,7 @@ namespace PicasaASP
             int id;
             if (!user_client.Add(first_name, last_name, login, mail, pwd, false))
             {
-                reponse.Text = "ERROR : Subscription hasn't turned to succeed.";
+                reponse.InnerText = "ERROR : Subscription hasn't turned to succeed.";
             }
             else
             {

@@ -8,6 +8,7 @@ using PicasaASP.Album_Service;
 using PicasaASP.Image_Service;
 using System.Drawing;
 using System.IO;
+using PicasaASP.User_Service;
 
 namespace PicasaASP
 {
@@ -16,6 +17,7 @@ namespace PicasaASP
 
         AlbumServiceClient album_client = new Album_Service.AlbumServiceClient();
         ImageServiceClient image_client = new Image_Service.ImageServiceClient();
+        UserServiceClient user_client = new User_Service.UserServiceClient();
         int currentId = 0;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,6 +34,8 @@ namespace PicasaASP
 
             AlbumsResponse userAlbums = album_client.Get_Albums_From_User(currentId);
 
+            Panel p = new Panel();
+            p.HorizontalAlign = new HorizontalAlign();
             foreach (Album a in userAlbums.Albums)
             {
                 Button b = new Button();
@@ -46,7 +50,7 @@ namespace PicasaASP
                 int[] tmp = image_client.Get_Images_ID_From_Album(currentAlbumId);
                 Random r = new Random();
                 int idVignette = r.Next(tmp.Length);
-                Panel p = new Panel();
+
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
                 if (tmp.Length > 0)
                 {
@@ -62,12 +66,16 @@ namespace PicasaASP
                 b.CssClass = "art-button";
                 p.Controls.Add(img);
                 p.Controls.Add(b);
+                System.Web.UI.WebControls.Image space = new System.Web.UI.WebControls.Image();
+                space.Width = 50;
+                p.Controls.Add(space);
                 albums.Controls.Add(p);
             }
 
             
             AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
-
+            Panel q = new Panel();
+            q.HorizontalAlign = new HorizontalAlign();
             foreach (Album a in otherAlbums.Albums)
             {
                 Button b = new Button();
@@ -78,7 +86,7 @@ namespace PicasaASP
                 int[] tmp = image_client.Get_Images_ID_From_Album(currentAlbumId);
                 Random r = new Random();
                 int idVignette = r.Next(tmp.Length);
-                Panel p = new Panel();
+     
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
                 if (tmp.Length > 0)
                 {
@@ -91,9 +99,9 @@ namespace PicasaASP
                 img.Width = 150;
                 img.Height = 150;
                 b.CssClass = "art-button";
-                p.Controls.Add(img);
-                p.Controls.Add(b);
-                albumsVisu.Controls.Add(p);
+                q.Controls.Add(img);
+                q.Controls.Add(b);
+                albumsVisu.Controls.Add(q);
             }
              
         }
@@ -111,7 +119,7 @@ namespace PicasaASP
                 img.Height = 200;
                 images.Controls.Add(img);
             }
-
+            reponse.InnerText = "Images from the album '" + album_name + "' - User : '" + user_client.Get_User("", Convert.ToInt32(((Button)sender).CommandName)).login + "'";
         }
     }
 }

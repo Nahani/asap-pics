@@ -17,10 +17,10 @@
 <asp:Content ID="SheetContent" ContentPlaceHolderID="SheetContentPlaceHolder" runat="Server">
     <div id="connexion_form" style="text-align: center;">
         <br />
-        <h1 style="text-align: center;" id="title">
+        <h1 runat="server" style="text-align: center;" id="title">
             Subscription</h1>
         <br />
-        <asp:Label Style="color: Red;" ID="reponse" runat="server"> </asp:Label>
+        <h1 style="color: Red; text-align: center;" ID="reponse" runat="server"> </h1>
         <br />
         <br />
         <table style="margin: 0 auto;">

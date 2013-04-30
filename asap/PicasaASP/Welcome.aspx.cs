@@ -37,7 +37,7 @@ namespace PicasaASP
             int id;
             if (!user_client.Check_password(login, pwd))
             {
-                reponse.Text = "ERROR : Bad login/password combination.";
+                reponse.InnerText = "ERROR : Bad login/password combination.";
             }
             else
             {

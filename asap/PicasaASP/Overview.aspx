@@ -22,18 +22,22 @@
             Brief overview of your albums</h1>
         <br />
         <br />
-        <asp:Panel ID="albums" runat="server" Width="100%" style="display: inline-block; float: left;"/>
+        <asp:Panel ID="albums" runat="server" width="100%" />
         <hr />
         <h1 style="text-align: center;" id="H1">
             Available read-only online albums</h1>
         <br />
         <br />
-        <asp:Panel ID="albumsVisu" runat="server" Width="100%" />
+        <asp:Panel ID="albumsVisu" runat="server" width="100%" />
         <hr />
-        <asp:Label Style="text-align: center; color: green;" ID="reponse">
-            Images</asp:Label>
+        <h1 style="text-align: center; color: green;" runat="server" id="reponse">
+            Images</h1>
         <br />
         <br />
         <asp:Panel ID="images" runat="server" Width="100%" />
+        <br />
+        <br />
+        <br />
+        <br />
     </div>
 </asp:Content>
