@@ -44,7 +44,7 @@ namespace PicasaASP
                                 b.Text = a.name; 
                                 ImageDownloadFromAlbumResponse tmp = image_client.Get_Images_From_Album(album_client.Get_Album_ID(a.name, currentId));
                 */
-                b.Text = a.name ;
+                b.Text = a.name;
                 b.CommandName = Convert.ToString(a.idUser);
                 int currentAlbumId = album_client.Get_Album_ID(a.name, currentId);
                 int[] tmp = image_client.Get_Images_ID_From_Album(currentAlbumId);
@@ -72,7 +72,7 @@ namespace PicasaASP
                 albums.Controls.Add(p);
             }
 
-            
+
             AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
             Panel q = new Panel();
             q.HorizontalAlign = new HorizontalAlign();
@@ -86,7 +86,7 @@ namespace PicasaASP
                 int[] tmp = image_client.Get_Images_ID_From_Album(currentAlbumId);
                 Random r = new Random();
                 int idVignette = r.Next(tmp.Length);
-     
+
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
                 if (tmp.Length > 0)
                 {
@@ -103,7 +103,7 @@ namespace PicasaASP
                 q.Controls.Add(b);
                 albumsVisu.Controls.Add(q);
             }
-             
+
         }
 
         protected void View_Album(object sender, EventArgs e)
@@ -119,7 +119,14 @@ namespace PicasaASP
                 img.Height = 200;
                 images.Controls.Add(img);
             }
-            reponse.InnerText = "Images from the album '" + album_name + "' - User : '" + user_client.Get_User("", Convert.ToInt32(((Button)sender).CommandName)).login + "'";
+            if (ids.Length == 0)
+            {
+                reponse.InnerText = "No picture available  from the album '" + album_name + "' - User : '" + user_client.Get_User("", Convert.ToInt32(((Button)sender).CommandName)).login + "'";
+            }
+            else
+            {
+                reponse.InnerText = "Images from the album '" + album_name + "' - User : '" + user_client.Get_User("", Convert.ToInt32(((Button)sender).CommandName)).login + "'";
+            }
         }
     }
 }

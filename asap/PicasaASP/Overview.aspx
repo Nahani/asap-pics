@@ -30,11 +30,11 @@
         <br />
         <asp:Panel ID="albumsVisu" runat="server" width="100%" />
         <hr />
-        <h1 style="text-align: center; color: green;" runat="server" id="reponse">
+        <h1 ID="reponse" style="text-align: center; color: green;" runat="server" >
             Images</h1>
         <br />
         <br />
-        <asp:Panel ID="images" runat="server" Width="100%" />
+        <asp:Panel ID="images" runat="server" width="100%" />
         <br />
         <br />
         <br />
