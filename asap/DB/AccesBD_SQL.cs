@@ -243,25 +243,6 @@ namespace DB
             return result;
         }
 
-        /*
-         * Obtenir une liste d'albums appartenant n'apparenant pas à l'utilisateur cible
-         * 
-         * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
-         * 
-         * @return la liste d'albums s'ils ont bien été récupérés, null le cas échéant
-         * 
-         */
-        public List<Album> Get_Albums_From_Other_Users(int idUser)
-        {
-            String req = "SELECT name FROM ALBUM WHERE idUser <> '" + idUser + "';";
-            SqlDataReader reader = Connexion.execute_Select(req);
-            List<Album> result = new List<Album>();
-            while (reader.Read())
-                result.Add(new Album(reader.GetString(0), idUser));
-            Connexion.close();
-            return result;
-        }
-
 
         /* 
          * Récupérer l'identifiant de l'l'album
@@ -354,7 +335,7 @@ namespace DB
         public bool Delete_Album(int idProp, String name)
         {
             bool flag = false;
-            String req = "DELETE FROM ALBUM WHERE idProp = '" + idProp + "' AND name = '" + name + "';";
+            String req = "DELETE FROM ALBUM WHERE idUser = '" + idProp + "' AND name = '" + name + "';";
             flag = Connexion.execute_Request(req);
             return flag;
         }
@@ -460,7 +441,7 @@ namespace DB
             SqlDataReader reader = Connexion.execute_Select(req);
             if (reader.Read())
             {
-                targeted_user = new User(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), Convert.ToBoolean(reader.GetInt32(6)));
+                targeted_user = new User(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), true);
             }
             Connexion.close();
             return targeted_user;
