@@ -22,13 +22,13 @@ namespace PicasaASP
             int id;
             if (!user_client.Add(first_name, last_name, login, mail, pwd, false))
             {
-                Response.Write("ERROR : Subscription hasn't turned to succeed.");
+                reponse.Text = "ERROR : Subscription hasn't turned to succeed.";
             }
             else
             {
                 id = user_client.Get_User_ID(login);
                 Session["id"] = id;
-                Response.Redirect("Albums.aspx");
+                Response.Redirect("Overview.aspx");
             }
 
         }

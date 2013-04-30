@@ -8,6 +8,8 @@ using PicasaASP.User_Service;
 using PicasaASP.Image_Service;
 using PicasaASP.Album_Service;
 using System.IO;
+using System.Drawing;
+using System.Reflection;
 
 namespace PicasaASP
 {
@@ -25,9 +27,20 @@ namespace PicasaASP
             iinfo.ID = id;
             iinfo.Album = Int32.Parse(Request.QueryString["idAlbum"]);
             iinfo.Name = image_client.Get_Image_Name(iinfo.ID, id);
-            
+
+            Byte[] bytes = null;
             // on récupére notre image là où il faut
-            Byte[] bytes = GetBytes(image_client.Get_Image(iinfo));
+            if (Request.QueryString["idAlbum"] != "default")
+            {
+                bytes = GetBytes(image_client.Get_Image(iinfo));
+            }
+            else
+            {
+                Bitmap bmp1 = new Bitmap("~/images/no_photo.jpg");
+                MemoryStream ms = new MemoryStream();
+                bmp1.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                bytes = ms.ToArray();
+            }
             // et on crée le contenu de notre réponse à la requête HTTP
             // (ici un contenu de type image)
             Response.Buffer = true;
