@@ -45,14 +45,15 @@ namespace PicasaASP
                 int idVignette = r.Next(tmp.Length);
                 Panel p = new Panel();
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
-                img.ImageUrl = "Image.aspx?id=" + tmp[idVignette] + "&idAlbum=" + currentAlbumId;
+                if (tmp.Length > 0)
+                    img.ImageUrl = "Image.aspx?id=" + tmp[idVignette] + "&idAlbum=" + currentAlbumId;
                 img.Width = 150;
                 p.Controls.Add(img);
                 p.Controls.Add(b);
                 albums.Controls.Add(p);
             }
 
-           /* AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
+            /*AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
 
             foreach (Album a in otherAlbums.Albums)
             {
