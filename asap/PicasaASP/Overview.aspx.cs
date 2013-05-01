@@ -58,7 +58,7 @@ namespace PicasaASP
                 }
                 else
                 {
-                    img.ImageUrl = "Image.aspx?id=&idAlbum=default";
+                    img.ImageUrl = "Image.aspx?idAlbum=default";
                 }
 
                 img.Width = 150;
@@ -94,7 +94,7 @@ namespace PicasaASP
                 }
                 else
                 {
-                    img.ImageUrl = "Image.aspx?id=&idAlbum=default";
+                    img.ImageUrl = "Image.aspx?idAlbum=default";
                 }
                 img.Width = 150;
                 img.Height = 150;

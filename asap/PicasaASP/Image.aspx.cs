@@ -21,25 +21,24 @@ namespace PicasaASP
         protected void Page_Load(object sender, EventArgs e)
         {
             // On récupére la valeur du paramètre ImageID passé dans l’URL
-            int id = Int32.Parse(Request.QueryString["id"]);
+          
 
-            ImageInfo iinfo = new ImageInfo();
-            iinfo.ID = id;
-            iinfo.Album = Int32.Parse(Request.QueryString["idAlbum"]);
-            iinfo.Name = image_client.Get_Image_Name(iinfo.ID, id);
+            ImageInfo iinfo = new ImageInfo();           
 
             Byte[] bytes = null;
             // on récupére notre image là où il faut
             if (Request.QueryString["idAlbum"] != "default")
             {
+                int id = Int32.Parse(Request.QueryString["id"]);
+                iinfo.ID = id;
+                iinfo.Album = Int32.Parse(Request.QueryString["idAlbum"]);
+                iinfo.Name = image_client.Get_Image_Name(iinfo.ID, id);
                 bytes = GetBytes(image_client.Get_Image(iinfo));
+                Response.BinaryWrite(bytes);
             }
             else
             {
-                Bitmap bmp1 = new Bitmap("~/images/no_photo.jpg");
-                MemoryStream ms = new MemoryStream();
-                bmp1.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                bytes = ms.ToArray();
+                Response.WriteFile("~/images/no_photo.jpg");
             }
             // et on crée le contenu de notre réponse à la requête HTTP
             // (ici un contenu de type image)
@@ -47,7 +46,6 @@ namespace PicasaASP
             Response.Charset = "";
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.ContentType = "image/jpeg";
-            Response.BinaryWrite(bytes);
             Response.Flush();
             Response.End();
         }
