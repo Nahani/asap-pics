@@ -43,9 +43,9 @@ namespace PicasaServices
             return resp;
         }
 
-        public string Get_Image_Name(int id, int idAlbum)
+        public string Get_Image_Name(int idAlbum, int id)
         {
-            return dataAccess.Get_Name_Img(id, idAlbum);
+            return dataAccess.Get_Name_Img(idAlbum,id);
         }
 
         public int Get_Image_ID(int idAlbum, string name)
@@ -53,23 +53,21 @@ namespace PicasaServices
             return dataAccess.Get_Id_Img(idAlbum, name);
         }
 
-        public List<ImageDownloadResponse> Get_Images_From_Album(int idAlbum)
+        public ImageDownloadFromAlbumResponse Get_Images_From_Album(ImageDownloadFromAlbumRequest request)
         {
-            List<byte[]> responses = dataAccess.Get_Image_From_Albums(idAlbum);
+            List<byte[]> responses = dataAccess.Get_Image_From_Albums(request.idAlbum);
             Console.WriteLine(responses.Count);
-            List<ImageDownloadResponse> result = new List<ImageDownloadResponse>();
+            ImageDownloadFromAlbumResponse result = new ImageDownloadFromAlbumResponse();
             foreach(byte[] blob in responses)
             {
-                ImageDownloadResponse resp = new ImageDownloadResponse();
                 if (blob == null)
                 {
-                    resp.ImageData = new MemoryStream(System.Text.Encoding.Default.GetBytes("null"));
+                    //result.ImagesData = new MemoryStream(System.Text.Encoding.Default.GetBytes("null"));
                 }
                 else
                 {
-                    resp.ImageData = new MemoryStream(blob);
+                    result.ImagesData.Add(new MemoryStream(blob));
                 }
-                result.Add(resp);
             }
             return result;
         }

@@ -44,7 +44,7 @@ namespace PicasaServices
         * 
         */
         [OperationContract]
-        bool Delete(int id, int idAlbum);
+        bool Delete(int idAlbum, int id);
 
 
         /*
@@ -92,7 +92,7 @@ namespace PicasaServices
          * 
          */
         [OperationContract]
-        List<ImageDownloadResponse> Get_Images_From_Album(int idAlbum);
+        ImageDownloadFromAlbumResponse Get_Images_From_Album(ImageDownloadFromAlbumRequest request);
 
         /* 
          * Récupérer tous les identififiants d'images d'un album
@@ -130,6 +130,26 @@ namespace PicasaServices
     {
         [MessageBodyMember(Order = 1)]
         public ImageInfo ImageInfo;
+    }
+
+    [MessageContract]
+    public class ImageDownloadFromAlbumResponse
+    {
+        [MessageBodyMember(Order = 1)]
+        public List<Stream> ImagesData;
+
+        public ImageDownloadFromAlbumResponse()
+        {
+            ImagesData = new List<Stream>();
+        }
+    }
+
+    [MessageContract]
+    public class ImageDownloadFromAlbumRequest
+    {
+        [MessageBodyMember(Order = 1)]
+        public int idAlbum;
+
     }
 
     [DataContract]
