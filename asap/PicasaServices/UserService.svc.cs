@@ -32,9 +32,9 @@ namespace WcfService
             return dataAccess.Get_User(login).Level;
         }
 
-        public User Get_User(String login)
+        public User Get_User(String login = null, int id = 0)
         {
-            return dataAccess.Get_User(login);
+            return dataAccess.Get_User(login,id);
         }
     }
 }

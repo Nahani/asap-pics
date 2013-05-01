@@ -86,6 +86,6 @@ namespace WcfService
         bool Get_User_Level(String login);
 
         [OperationContract]
-        User Get_User(String login);
+        User Get_User(String login = "", int id = 0);
     }
 }
