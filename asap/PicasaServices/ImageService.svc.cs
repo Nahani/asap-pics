@@ -53,25 +53,6 @@ namespace PicasaServices
             return dataAccess.Get_Id_Img(idAlbum, name);
         }
 
-        public ImageDownloadFromAlbumResponse Get_Images_From_Album(ImageDownloadFromAlbumRequest request)
-        {
-            List<byte[]> responses = dataAccess.Get_Image_From_Albums(request.idAlbum);
-            Console.WriteLine(responses.Count);
-            ImageDownloadFromAlbumResponse result = new ImageDownloadFromAlbumResponse();
-            foreach(byte[] blob in responses)
-            {
-                if (blob == null)
-                {
-                    //result.ImagesData = new MemoryStream(System.Text.Encoding.Default.GetBytes("null"));
-                }
-                else
-                {
-                    result.ImagesData.Add(new MemoryStream(blob));
-                }
-            }
-            return result;
-        }
-
         public List<int> Get_Images_ID_From_Album(int idAlbum)
         {
             return dataAccess.Get_Image_ID_From_Albums(idAlbum);
