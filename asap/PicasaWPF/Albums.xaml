@@ -13,10 +13,10 @@ BorderThickness="3" CornerRadius="5">
                     <Image Width="150" Height="100" Stretch="Fill"
 Source="{Binding Path=Image, Converter={StaticResource
 ByteArrayToImageConverter}, Mode=Default}"/>
-                    <TextBlock Text="{Binding Path=Nom}"
+                    <TextBlock Text="{Binding Path=Name}"
 HorizontalAlignment="Center"/>
-                    <Button Tag="{Binding Path=Nom}" Margin="5,5,5,5" Content="afficher" Click="printAlbum_click"/>
-                    <Button Tag="{Binding Path=Nom}" Margin="5,5,5,5" Content="supprimer" Click="deleteAlbum_click"/>
+                    <Button Tag="{Binding Path=Name}" Margin="5,5,5,5" Content="afficher" Click="printAlbum_click"/>
+                    <Button Tag="{Binding Path=Name}" Margin="5,5,5,5" Content="supprimer" Click="deleteAlbum_click"/>
                 </StackPanel>
             </Border>
         </DataTemplate>

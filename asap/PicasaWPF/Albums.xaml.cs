@@ -44,7 +44,7 @@ namespace PicasaWPF
                    //  MessageBox.Show(Convert.ToString(img.Length));
                 if (img.Length == 0)
                 {
-                    image = ImageObject.lireFichier(@"C:\Users\user\Documents\Visual Studio 2012\Projects\asap-pics\PicasaASP\images\no_photo.jpg");
+                    image = ImageObject.lireFichier(@"C:\Users\user\Desktop\commande.jpg");
                 }
                 else
                 {
@@ -68,10 +68,18 @@ namespace PicasaWPF
 
         private void createAlbum_click(object sender, RoutedEventArgs e)
         {
+            CreateAlbum createAlbum = new CreateAlbum();
+            this.Close();
+            createAlbum.Show();
         }
 
         private void printAlbum_click(object sender, RoutedEventArgs e)
         {
+            Button b = sender as Button;
+            int idA = MainWindow.album_client.Get_Album_ID((string)b.Tag, MainWindow.currentId);
+            DragAndDrop drag = new DragAndDrop(idA);
+            this.Close();
+            drag.Show();
         }
 
         private void deleteAlbum_click(object sender, RoutedEventArgs e)
@@ -82,7 +90,7 @@ namespace PicasaWPF
             int[] imgs = MainWindow.image_client.Get_Images_ID_From_Album(idAlbum);
             foreach (int i in imgs)
             {
-                MainWindow.image_client.Delete(MainWindow.currentId, i);
+                MainWindow.image_client.Delete(i, idAlbum);
             }
             MainWindow.album_client.Delete(name, MainWindow.currentId);
             Albums a = new Albums();
