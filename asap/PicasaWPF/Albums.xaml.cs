@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PicasaWPF.Album_Service;
 using PicasaWPF.Image_Service;
+using System.IO;
 
 namespace PicasaWPF
 {
@@ -39,18 +40,20 @@ namespace PicasaWPF
             foreach (Album a in albums.Albums)
             {
                 albumId = MainWindow.album_client.Get_Album_ID(a.name, MainWindow.currentId);
-                img = MainWindow.image_client.Get_Images_ID_From_Album(albumId); 
-                     MessageBox.Show(Convert.ToString(img.Length));
+               img = MainWindow.image_client.Get_Images_ID_From_Album(albumId); 
+                   //  MessageBox.Show(Convert.ToString(img.Length));
                 if (img.Length == 0)
                 {
-                    image = ImageObject.lireFichier("C:\\Users\\user\\Desktop\\commande.jpg");
+                    image = ImageObject.lireFichier(@"C:\Users\user\Documents\Visual Studio 2012\Projects\asap-pics\PicasaASP\images\no_photo.jpg");
                 }
                 else
                 {
                     Random r = new Random();
                     int idVignette = r.Next(img.Length);
-                    img_name = MainWindow.image_client.Get_Image_Name(MainWindow.currentId, img[idVignette]);
+                    img_name = MainWindow.image_client.Get_Image_Name(albumId, img[idVignette]);
                     infos.Name = img_name;
+                    infos.Album = albumId;
+                    infos.ID = img[idVignette];
                     image = ImageObject.GetBytes(MainWindow.image_client.Get_Image(infos));
                 }
                 albumCollection.Add(new AlbumObject(a.name, image));
