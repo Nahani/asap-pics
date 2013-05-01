@@ -1,0 +1,9 @@
+﻿<Window x:Class="PicasaWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Welcome to ASAP-pics !" Height="300" Width="300">
+    <Grid Background="LightGreen">
+        <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="86,66,0,0" Name="connexion" VerticalAlignment="Top" Width="98" Click="connection_Click" />
+        <Button Content="Subscribe" Height="23" HorizontalAlignment="Left" Margin="86,141,0,0" Name="inscription" VerticalAlignment="Top" Width="98" Click="subscription_Click" />
+    </Grid>
+</Window>
