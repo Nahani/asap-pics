@@ -23,7 +23,7 @@ namespace PicasaWPF
     public partial class Albums : Window
     {
 
-        private AlbumCollection albumCollection;
+        private ImageCollection albumCollection;
 
         public Albums()
         {
@@ -31,7 +31,7 @@ namespace PicasaWPF
             InitializeComponent();
             AlbumsResponse albums = MainWindow.album_client.Get_Albums_From_User(MainWindow.currentId);
             // On crée notre collection d'album et on y ajoute chaque album
-            albumCollection = new AlbumCollection();
+            albumCollection = new ImageCollection();
             int albumId = 0;
             int[] img = null;
             Image_Service.ImageInfo infos = new Image_Service.ImageInfo();
@@ -61,7 +61,7 @@ namespace PicasaWPF
                     infos.ID = img[idVignette];
                     image = ImageObject.GetBytes(MainWindow.image_client.Get_Image(infos));
                 }
-                albumCollection.Add(new AlbumObject(a.name, image));
+                albumCollection.Add(new ImageObject(a.name, image));
             }
 
 
