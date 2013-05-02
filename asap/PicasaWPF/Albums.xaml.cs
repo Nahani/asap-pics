@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using PicasaWPF.Album_Service;
 using PicasaWPF.Image_Service;
 using System.IO;
+using System.Drawing;
 
 namespace PicasaWPF
 {
@@ -45,7 +46,10 @@ namespace PicasaWPF
                    //  MessageBox.Show(Convert.ToString(img.Length));
                 if (img.Length == 0)
                 {
-                    image = ImageObject.lireFichier(@"C:\Users\user\Desktop\commande.jpg");
+                    Bitmap test = Properties.Resources.no_photo;
+                    MemoryStream ms = new MemoryStream();
+                    test.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    image = ms.ToArray();
                 }
                 else
                 {
