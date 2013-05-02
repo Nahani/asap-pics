@@ -35,11 +35,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,6 +67,12 @@
     </Compile>
     <Compile Include="AlbumObject.cs" />
     <Compile Include="ByteArrayToImageConverter.cs" />
+    <Compile Include="CreateAlbum.xaml.cs">
+      <DependentUpon>CreateAlbum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DragAndDrop.xaml.cs">
+      <DependentUpon>DragAndDrop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageObject.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -87,6 +98,14 @@
     <Page Include="Albums.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateAlbum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DragAndDrop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
@@ -156,13 +175,7 @@
     <None Include="Service References\Image_Service\ImageService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Image_Service\ImageService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\Image_Service\ImageService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Image_Service\ImageService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Image_Service\ImageService5.xsd">
@@ -170,9 +183,6 @@
     </None>
     <None Include="Service References\Image_Service\ImageService6.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Image_Service\PicasaWPF.Image_Service.ImageDownloadResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\User_Service\PicasaWPF.User_Service.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -234,6 +244,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\no_photo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
