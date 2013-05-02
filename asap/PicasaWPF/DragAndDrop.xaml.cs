@@ -162,7 +162,6 @@ namespace PicasaWPF
             ListBox parent = (ListBox)sender;
             if (dragSource != parent)
             {
-
                 Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
                 DirectoryInfo dirInfo = new DirectoryInfo(PATH);
                 IEnumerable<FileInfo> filesInfo = dirInfo.EnumerateFiles();
