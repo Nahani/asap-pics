@@ -84,7 +84,7 @@ namespace PicasaWPF
             }
         }
 
-        private static Dictionary<string, byte[]> Read_Images_From_Local_Folder(string path)
+        private Dictionary<string, byte[]> Read_Images_From_Local_Folder(string path)
         {
             Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
             DirectoryInfo dirInfo = new DirectoryInfo(path);
@@ -97,6 +97,13 @@ namespace PicasaWPF
                 {
                     files.Add(fi.Name.Split('.')[0], ImageObject.lireFichier(fi.FullName));
                 }
+            }
+            if (files.Count == 0)
+            {
+                no_img.FontSize = 30;
+                no_img.VerticalAlignment = VerticalAlignment.Center;
+                no_img.TextAlignment = TextAlignment.Center;
+                no_img.Text = "NO PICTURES AVAILABLE IN THE LOCAL FOLDER";
             }
             return files;
         }
@@ -113,6 +120,13 @@ namespace PicasaWPF
                 img.Name = MainWindow.image_client.Get_Image_Name(img.Album, id);
                 byte[] bytes = ImageObject.GetBytes(MainWindow.image_client.Get_Image(img));
                 files.Add(img.Name, bytes);
+            }
+            if (files.Count == 0)
+            {
+                no_img_db.FontSize = 30;
+                no_img_db.VerticalAlignment = VerticalAlignment.Center;
+                no_img_db.TextAlignment = TextAlignment.Center;
+                no_img_db.Text = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
             }
             return files;
         }

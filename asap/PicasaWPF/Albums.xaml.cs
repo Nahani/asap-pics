@@ -63,6 +63,13 @@ namespace PicasaWPF
                 }
                 albumCollection.Add(new ImageObject(a.name, image));
             }
+            if (albums.Albums.Length == 0)
+            {
+                no_album.FontSize = 30;
+                no_album.VerticalAlignment = VerticalAlignment.Center;
+                no_album.TextAlignment = TextAlignment.Center;
+                no_album.Text = "NO ALBUM AVAILABLE IN THE LOCAL FOLDER";
+            }
 
 
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
