@@ -28,7 +28,7 @@ namespace PicasaWPF
         {
             string name = textName.Text;
 
-            if (!MainWindow.album_client.Add(name, MainWindow.currentId))
+            if (name == "" || name.Equals(null) || !MainWindow.album_client.Add(name, MainWindow.currentId))
             {
                 MessageBoxResult result = MessageBox.Show("ERROR : Adding hasn't turned to succees\nPlease try another name");
             }

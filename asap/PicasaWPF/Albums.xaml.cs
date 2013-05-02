@@ -89,14 +89,18 @@ namespace PicasaWPF
             string name = (string)b.Tag;
             int idAlbum = MainWindow.album_client.Get_Album_ID(name, MainWindow.currentId);
             int[] imgs = MainWindow.image_client.Get_Images_ID_From_Album(idAlbum);
-            foreach (int i in imgs)
-            {
-                MainWindow.image_client.Delete(i, idAlbum);
-            }
-            MainWindow.album_client.Delete(name, MainWindow.currentId);
-            Albums a = new Albums();
-            this.Close();
-            a.Show();
+            MessageBoxResult result = MessageBox.Show("Do you really want to remove album '" + name + "' ?", "Caption", MessageBoxButton.YesNo);
+             if (result == MessageBoxResult.Yes)
+             {
+                 foreach (int i in imgs)
+                 {
+                     MainWindow.image_client.Delete(i, idAlbum);
+                 }
+                 MainWindow.album_client.Delete(name, MainWindow.currentId);
+                 Albums a = new Albums();
+                 this.Close();
+                 a.Show();
+             }
         }
 
         private void disconnect_click(object sender, RoutedEventArgs e)

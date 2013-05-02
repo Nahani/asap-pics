@@ -14,7 +14,7 @@
         <Label Content="Mail" Height="28" HorizontalAlignment="Left" Margin="43,153,0,0" Name="labelMail" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="127,155,0,0" Name="textMail" VerticalAlignment="Top" Width="120" />
 
-        <Button Content="Validate" Height="23" HorizontalAlignment="Center" Margin="30,203,161,0" Name="inscription" VerticalAlignment="Top" Width="87" Click="click_subscription" />
-        <Button Content="Return to menu" Height="23" HorizontalAlignment="Center" Margin="138,203,31,0" Name="retour" VerticalAlignment="Top" Width="109" Click="click_return" />
+        <Button Content="Validate" Height="46" HorizontalAlignment="Center" Margin="22,203,161,0" Name="inscription" VerticalAlignment="Top" Width="95" Click="click_subscription" />
+        <Button Content="Return to menu" Height="46" HorizontalAlignment="Center" Margin="127,203,31,0" Name="retour" VerticalAlignment="Top" Width="120" Click="click_return" />
     </Grid>
 </Window>

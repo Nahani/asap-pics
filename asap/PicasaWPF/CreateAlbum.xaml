@@ -6,7 +6,7 @@
         <Label Content="Name" Height="28" HorizontalAlignment="Left" Margin="28,60,0,0" Name="labelNom" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="94,62,0,0" Name="textName" VerticalAlignment="Top" Width="120" />
 
-        <Button Content="Add" Height="23" HorizontalAlignment="Center" Margin="28,129,142,0" Name="ajout" VerticalAlignment="Top" Width="75" Click="addAlbum" />
-        <Button Content="Return" Height="23" HorizontalAlignment="Center" Margin="138,129,32,0" Name="retour" VerticalAlignment="Top" Width="75" Click="return_click" />
+        <Button Content="Add" Height="37" HorizontalAlignment="Center" Margin="20,129,142,0" Name="ajout" VerticalAlignment="Top" Width="84" Click="addAlbum" />
+        <Button Content="Return to menu" Height="37" HorizontalAlignment="Center" Margin="128,129,12,0" Name="retour" VerticalAlignment="Top" Width="106" Click="return_click" />
     </Grid>
 </Window>
