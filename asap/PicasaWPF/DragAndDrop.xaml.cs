@@ -29,11 +29,12 @@ namespace PicasaWPF
 
         public DragAndDrop(int IdAlbum)
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             this.idAlbum = IdAlbum;
             // On crée notre collection d'image et on y ajoute deux images
             imageCollection1 = new ImageCollection();
-            Dictionary<string, byte[]> files = lireImageRepertoireLocal(PATH);
+            Dictionary<string, byte[]> files = Read_Images_From_Local_Folder(PATH);
             for (int i = 0; i < files.Values.Count; i++)
             {
                 imageCollection1.Add(new ImageObject(files.Keys.ElementAt(i), files.Values.ElementAt(i)));
@@ -44,7 +45,7 @@ namespace PicasaWPF
             imageSource.ObjectInstance = imageCollection1;
 
             imageCollection2 = new ImageCollection();
-            files = lireImageRepertoireDB(idAlbum);
+            files = Read_Images_From_DB(idAlbum);
             for (int i = 0; i < files.Values.Count; i++)
             {
                 imageCollection2.Add(new ImageObject(files.Keys.ElementAt(i), files.Values.ElementAt(i)));
@@ -55,7 +56,7 @@ namespace PicasaWPF
             imageSrc.ObjectInstance = imageCollection2;
         }
 
-        private static void ecrireFichier(string chemin, byte[] file)
+        private static void writeInFile(string chemin, byte[] file)
         {
             try
             {
@@ -72,7 +73,18 @@ namespace PicasaWPF
             }
         }
 
-        private static Dictionary<string, byte[]> lireImageRepertoireLocal(string path)
+        public void ChooseFolder(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                PATH = folderBrowserDialog1.SelectedPath;
+                local_maj();
+            }
+        }
+
+        private static Dictionary<string, byte[]> Read_Images_From_Local_Folder(string path)
         {
             Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
             DirectoryInfo dirInfo = new DirectoryInfo(path);
@@ -81,7 +93,7 @@ namespace PicasaWPF
             {
                 string tmp = fi.FullName;
                 string[] tabTmp = tmp.Split('.');
-                if (tabTmp[tabTmp.Length - 1] == "jpg" || tabTmp[tabTmp.Length - 1] == "png")
+                if (tabTmp[tabTmp.Length - 1].ToLower() == "jpg" || tabTmp[tabTmp.Length - 1].ToLower() == "png")
                 {
                     files.Add(fi.Name.Split('.')[0], ImageObject.lireFichier(fi.FullName));
                 }
@@ -89,7 +101,7 @@ namespace PicasaWPF
             return files;
         }
 
-        private Dictionary<string, byte[]> lireImageRepertoireDB(int idAlbum)
+        private Dictionary<string, byte[]> Read_Images_From_DB(int idAlbum)
         {
             Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
             int[] idImages = MainWindow.image_client.Get_Images_ID_From_Album(idAlbum);
@@ -100,11 +112,10 @@ namespace PicasaWPF
                 img.Album = idAlbum;
                 img.Name = MainWindow.image_client.Get_Image_Name(img.Album, id);
                 byte[] bytes = ImageObject.GetBytes(MainWindow.image_client.Get_Image(img));
-                files.Add(img.Name ,bytes);
+                files.Add(img.Name, bytes);
             }
             return files;
         }
-
 
         // On initie le Drag and Drop
         private void ImageDragEvent(object sender, MouseButtonEventArgs e)
@@ -126,7 +137,23 @@ namespace PicasaWPF
             {
                 ImageObject data = (ImageObject)e.Data.GetData(typeof(ImageObject));
                 ((IList)parent.ItemsSource).Add(data);
-                addImage(data.Image, data.Name, this.idAlbum);
+                 Dictionary<string, byte[]> files = Read_Images_From_DB(idAlbum);
+                 for (int i = 0; i < files.Values.Count; i++)
+                 {
+                     //MessageBox.Show(files.Keys.ElementAt(i).TrimEnd() + " " + data.Name.TrimEnd() + ".jpg");
+                     if (files.Keys.ElementAt(i).TrimEnd().Equals(data.Name.TrimEnd()))
+                     {
+                          MessageBoxResult result = MessageBox.Show("File of name '" + data.Name.TrimEnd() + "' already exists. Do you really want to replace it from DB ?", "Caption", MessageBoxButton.YesNo);
+                          if (result == MessageBoxResult.Yes)
+                          {
+                              MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum);
+                              addImage(data.Image, data.Name, this.idAlbum);
+                              db_maj(); 
+                              return;
+                          }
+                     }
+                 }
+                 addImage(data.Image, data.Name, this.idAlbum);
             }
         }
 
@@ -135,9 +162,32 @@ namespace PicasaWPF
             ListBox parent = (ListBox)sender;
             if (dragSource != parent)
             {
+
+                Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
+                DirectoryInfo dirInfo = new DirectoryInfo(PATH);
+                IEnumerable<FileInfo> filesInfo = dirInfo.EnumerateFiles();
                 ImageObject data = (ImageObject)e.Data.GetData(typeof(ImageObject));
+                foreach (FileInfo fi in filesInfo.ToList())
+                {
+                    
+                    string tmp = fi.FullName;
+                    string[] tabTmp = tmp.Split('\\');
+                    //MessageBox.Show("tmp : " + tabTmp[tabTmp.Length-1].ToLower() + " AND data : " + data.Name.TrimEnd() + ".jpg");
+                    if ((tabTmp[tabTmp.Length - 1].ToLower()).Equals(data.Name.TrimEnd() + ".jpg"))
+                    {
+                        MessageBoxResult result = MessageBox.Show("File of name '" + data.Name.TrimEnd() + "' already exists. Do you really want to remove it from local repository ?", "Caption", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            ((IList)parent.ItemsSource).Add(data);
+                            writeInFile(PATH + "\\" + data.Name.TrimEnd() + ".jpg", data.Image);
+                            local_maj(); 
+                        }
+                        return;
+                    }
+                }
                 ((IList)parent.ItemsSource).Add(data);
-                ecrireFichier(PATH + "\\" + data.Name + ".jpg", data.Image);
+                writeInFile(PATH + "\\" + data.Name.TrimEnd() + ".jpg", data.Image);
+                local_maj();
             }
         }
 
@@ -186,32 +236,53 @@ namespace PicasaWPF
             a.Show();
         }
 
+        private void refresh(object sender, RoutedEventArgs e)
+        {
+            db_maj();
+            local_maj();
+        }
+
         private void deleteImage(object sender, MouseButtonEventArgs e)
         {
             ListBox parent = (ListBox)sender;
             ImageObject data = (ImageObject)GetDataFromListBox(parent, e.GetPosition(parent));
 
-            MessageBoxResult result = MessageBox.Show("Do you really want to remove " + data.Name + " ?", "Caption", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Do you really want to remove " + data.Name.TrimEnd() + " ?", "Caption", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum,data.Name), idAlbum);
-                majDB();
+                MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum);
+                db_maj();
             }
         }
 
-        private void majDB()
+        private void local_maj()
         {
-            Dictionary<string, byte[]> files = lireImageRepertoireLocal(PATH);
+            Dictionary<string, byte[]> files = Read_Images_From_Local_Folder(PATH);
+            imageCollection1 = new ImageCollection();
+            for (int i = 0; i < files.Values.Count; i++)
+            {
+                imageCollection1.Add(new ImageObject(files.Keys.ElementAt(i), files.Values.ElementAt(i)));
+            }
+
+            // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
+            ObjectDataProvider imageSrc1 = (ObjectDataProvider)FindResource("ImageCollection1");
+            imageSrc1.ObjectInstance = imageCollection1;
+        }
+
+
+
+        private void db_maj()
+        {
             imageCollection2 = new ImageCollection();
-            files = lireImageRepertoireDB(idAlbum);
+            Dictionary<string, byte[]> files = Read_Images_From_DB(idAlbum);
             for (int i = 0; i < files.Values.Count; i++)
             {
                 imageCollection2.Add(new ImageObject(files.Keys.ElementAt(i), files.Values.ElementAt(i)));
             }
 
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
-            ObjectDataProvider imageSrc = (ObjectDataProvider)FindResource("ImageCollection2");
-            imageSrc.ObjectInstance = imageCollection2;
+            ObjectDataProvider imageSrc2 = (ObjectDataProvider)FindResource("ImageCollection2");
+            imageSrc2.ObjectInstance = imageCollection2;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace PicasaWPF
     {
         public Login()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
         

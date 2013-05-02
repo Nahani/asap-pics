@@ -26,6 +26,7 @@ namespace PicasaWPF
 
         public Albums()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             AlbumsResponse albums = MainWindow.album_client.Get_Albums_From_User(MainWindow.currentId);
             // On crée notre collection d'album et on y ajoute chaque album

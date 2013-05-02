@@ -20,6 +20,7 @@ namespace PicasaWPF
     {
         public CreateAlbum()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 

@@ -21,6 +21,7 @@ namespace PicasaWPF
     {
         public Subscription()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
