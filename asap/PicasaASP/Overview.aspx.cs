@@ -36,6 +36,12 @@ namespace PicasaASP
 
             Panel p = new Panel();
             p.HorizontalAlign = new HorizontalAlign();
+            int n = 0;
+            Table table = new Table();
+            TableRow rowImage = new TableRow();
+            TableRow rowName = new TableRow();
+            Dictionary<System.Web.UI.WebControls.Image, Button> albumsDico = new Dictionary<System.Web.UI.WebControls.Image, Button>();
+
             foreach (Album a in userAlbums.Albums)
             {
                 Button b = new Button();
@@ -64,18 +70,53 @@ namespace PicasaASP
                 img.Width = 150;
                 img.Height = 150;
                 b.CssClass = "art-button";
-                p.Controls.Add(img);
-                p.Controls.Add(b);
-                System.Web.UI.WebControls.Image space = new System.Web.UI.WebControls.Image();
+                //p.Controls.Add(img);
+                //p.Controls.Add(b);
+                albumsDico.Add(img, b);
+                /*System.Web.UI.WebControls.Image space = new System.Web.UI.WebControls.Image();
                 space.Width = 50;
-                p.Controls.Add(space);
-                albums.Controls.Add(p);
+                p.Controls.Add(space);*/
+               
             }
+
+            foreach (System.Web.UI.WebControls.Image img in albumsDico.Keys)
+            {
+                n++;
+                if (n == 1)
+                {
+                    rowImage = new TableRow();
+                    rowName = new TableRow();
+                }
+                TableCell cellImage = new TableCell();
+                TableCell cellName = new TableCell();
+
+                cellImage.Controls.Add(img);
+                cellName.Controls.Add(albumsDico[img]);
+
+                rowImage.Cells.Add(cellImage);
+                rowName.Cells.Add(cellName);
+
+                if (n == 4)
+                {
+                    n = 0;
+                    table.Rows.Add(rowImage);
+                    table.Rows.Add(rowName);
+                }
+            }
+
+            if (albumsDico.Keys.Count % 4 != 0)
+            {
+                table.Rows.Add(rowImage);
+                table.Rows.Add(rowName);
+            }
+
+            table.HorizontalAlign = HorizontalAlign.Center;
+            albums.Controls.Add(table);
 
 
             AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
-            Panel q = new Panel();
-            q.HorizontalAlign = new HorizontalAlign();
+            albumsDico = new Dictionary<System.Web.UI.WebControls.Image, Button>();
+            table = new Table();
             foreach (Album a in otherAlbums.Albums)
             {
                 Button b = new Button();
@@ -99,10 +140,45 @@ namespace PicasaASP
                 img.Width = 150;
                 img.Height = 150;
                 b.CssClass = "art-button";
-                q.Controls.Add(img);
-                q.Controls.Add(b);
-                albumsVisu.Controls.Add(q);
+
+                albumsDico.Add(img, b);
+               
             }
+
+            
+            foreach (System.Web.UI.WebControls.Image img in albumsDico.Keys)
+            {
+                n++;
+                if (n == 1)
+                {
+                    rowImage = new TableRow();
+                    rowName = new TableRow();
+                }
+                TableCell cellImage = new TableCell();
+                TableCell cellName = new TableCell();
+
+                cellImage.Controls.Add(img);
+                cellName.Controls.Add(albumsDico[img]);
+
+                rowImage.Cells.Add(cellImage);
+                rowName.Cells.Add(cellName);
+
+                if (n == 4)
+                {
+                    n = 0;
+                    table.Rows.Add(rowImage);
+                    table.Rows.Add(rowName);
+                }
+            }
+
+            if (albumsDico.Keys.Count % 4 != 0)
+            {
+                table.Rows.Add(rowImage);
+                table.Rows.Add(rowName);
+            }
+
+            table.HorizontalAlign = HorizontalAlign.Center;
+            albumsVisu.Controls.Add(table);
 
         }
 
@@ -111,14 +187,56 @@ namespace PicasaASP
             String album_name = ((Button)sender).Text;
             int currentAlbumId = album_client.Get_Album_ID(album_name, Convert.ToInt32(((Button)sender).CommandName));
             int[] ids = image_client.Get_Images_ID_From_Album(currentAlbumId);
+
+            Dictionary<String, System.Web.UI.WebControls.Image> imagesAlbum = new Dictionary<String, System.Web.UI.WebControls.Image>();
             foreach (int id in ids)
             {
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
                 img.ImageUrl = "Image.aspx?id=" + id + "&idAlbum=" + currentAlbumId;
                 img.Width = 300;
                 img.Height = 200;
-                images.Controls.Add(img);
+
+                imagesAlbum.Add(image_client.Get_Image_Name(currentAlbumId, id), img);
+
+
             }
+            int n = 0;
+            Table table = new Table();
+            TableRow rowImage = new TableRow();
+            TableRow rowName = new TableRow();
+            foreach (String imageName in imagesAlbum.Keys)
+            {
+                n++;
+                if (n == 1)
+                {
+                    rowImage = new TableRow();
+                    rowName = new TableRow();
+                }
+                TableCell cellImage = new TableCell();
+                TableCell cellName = new TableCell();
+
+                cellImage.Controls.Add(imagesAlbum[imageName]);
+                cellName.Controls.Add(new LiteralControl(imageName));
+
+                rowImage.Cells.Add(cellImage);
+                rowName.Cells.Add(cellName);
+
+                if (n == 4)
+                {
+                    n = 0;
+                    table.Rows.Add(rowImage);
+                    table.Rows.Add(rowName);
+                }
+            }
+
+            if (imagesAlbum.Keys.Count % 4 != 0)
+            {
+                table.Rows.Add(rowImage);
+                table.Rows.Add(rowName);
+            }
+
+            table.HorizontalAlign = HorizontalAlign.Center;
+            images.Controls.Add(table);
             if (ids.Length == 0)
             {
                 reponse.InnerText = "No picture available  from the album '" + album_name + "' - User : '" + user_client.Get_User("", Convert.ToInt32(((Button)sender).CommandName)).login + "'";
