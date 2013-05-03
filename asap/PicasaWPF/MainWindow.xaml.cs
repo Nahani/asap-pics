@@ -1,4 +1,15 @@
-﻿using System;
+﻿/**
+ * 	Fichier : MainWindow.xaml.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des actions disponible sur la fenêtre d'accueil (connection, inscription)
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Code behind de l'interface d'accueil
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

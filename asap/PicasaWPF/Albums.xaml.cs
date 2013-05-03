@@ -1,4 +1,15 @@
-﻿using System;
+﻿/**
+ * 	Fichier : Albums.xaml.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des actions disponible sur la fenêtre des albums (create, delete, view)
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Code behind de l'interface des albums
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,12 +74,12 @@ namespace PicasaWPF
                 }
                 albumCollection.Add(new ImageObject(a.name, image));
             }
-            if (albums.Albums.Length == 0)
+           if (albums.Albums.Length == 0)
             {
                 no_album.FontSize = 30;
                 no_album.VerticalAlignment = VerticalAlignment.Center;
-                no_album.TextAlignment = TextAlignment.Center;
-                no_album.Text = "NO ALBUM AVAILABLE IN THE LOCAL FOLDER";
+                //no_album.con = TextAlignment.Center;
+                no_album.Content = "NO ALBUM AVAILABLE IN THE LOCAL FOLDER";
             }
 
 

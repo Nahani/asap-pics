@@ -1,4 +1,15 @@
-﻿using System;
+﻿/**
+ * 	Fichier : CreateAlbum.xaml.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des actions disponible sur la fenêtre de création d'un album
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Code behind de l'interface de création d'un album
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

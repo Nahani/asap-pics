@@ -35,7 +35,7 @@ ItemTemplate="{StaticResource AlbumSourceTemplate}" Margin="0,0,0,50">
         </ListBox>
         <Button Content="New Album" Height="32" HorizontalAlignment="Left" Margin="22,465,0,0" Name="album" VerticalAlignment="Top" Width="124" Click="createAlbum_click" />
         <Button Content="Disconnect" Height="32" HorizontalAlignment="Right" Margin="0,465,12,0" Name="button1" VerticalAlignment="Top" Width="121" Click="disconnect_click" />
-        <TextBox Name="no_album" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Width="1102" Margin="1,0,-1,50" Height="459" />
+        <Label Name="no_album" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Grid.RowDefinitions/>
     </Grid>
 </Window>

@@ -1,4 +1,15 @@
-﻿using System;
+﻿/**
+ * 	Fichier : ByteArrayToImage.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition de la convertion
+ * 		
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Outil de convertion d'un tableau d'octets en une image
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

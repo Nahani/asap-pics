@@ -1,4 +1,15 @@
-﻿using System;
+﻿/**
+ * 	Fichier : DragAndDrop.xaml.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des actions disponible sur la fenêtre de visualisation d'un album (DragAndDrop, delete, local directory)
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Code behind de l'interface de visualisation d'un album
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -102,8 +113,7 @@ namespace PicasaWPF
             {
                 no_img.FontSize = 30;
                 no_img.VerticalAlignment = VerticalAlignment.Center;
-                no_img.TextAlignment = TextAlignment.Center;
-                no_img.Text = "NO PICTURES AVAILABLE IN THE LOCAL FOLDER";
+                no_img.Content = "NO PICTURES AVAILABLE IN THE LOCAL FOLDER";
             }
             return files;
         }
@@ -125,8 +135,7 @@ namespace PicasaWPF
             {
                 no_img_db.FontSize = 30;
                 no_img_db.VerticalAlignment = VerticalAlignment.Center;
-                no_img_db.TextAlignment = TextAlignment.Center;
-                no_img_db.Text = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
+                no_img_db.Content = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
             }
             return files;
         }

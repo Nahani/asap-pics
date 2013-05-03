@@ -1,4 +1,16 @@
-﻿using System;
+﻿/**
+ * 	Fichier : Login.xaml.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des actions disponible sur la fenêtre de connection
+ * 		- Vérification de l'utilisateur
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Code behind de l'interface de connection
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

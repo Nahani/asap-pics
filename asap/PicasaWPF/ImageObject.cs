@@ -1,4 +1,15 @@
-﻿using System;
+﻿/**
+ * 	Fichier : ImageObject.cs 
+ * 
+ * 	Version : 1.0.0 
+ * 		- Definition des actions disponible pour un objet Image
+ * 
+ * 	Auteurs : Théo BOURDIN, Alexandre BOURSIER & Nolan POTIER
+ * 	
+ * 	Résumé : Définition d'une Image et d'une collection d'images
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
