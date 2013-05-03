@@ -47,10 +47,6 @@ namespace PicasaASP
             {
                 Button b = new Button();
                 b.Click += new EventHandler(this.View_Album);
-                /*
-                                b.Text = a.name; 
-                                ImageDownloadFromAlbumResponse tmp = image_client.Get_Images_From_Album(album_client.Get_Album_ID(a.name, currentId));
-                */
                 b.Text = a.name;
                 b.CommandName = Convert.ToString(a.idUser);
                 int currentAlbumId = album_client.Get_Album_ID(a.name, currentId);
@@ -71,12 +67,7 @@ namespace PicasaASP
                 img.Width = 150;
                 img.Height = 150;
                 b.CssClass = "art-button";
-                //p.Controls.Add(img);
-                //p.Controls.Add(b);
                 albumsDico.Add(img, b);
-                /*System.Web.UI.WebControls.Image space = new System.Web.UI.WebControls.Image();
-                space.Width = 50;
-                p.Controls.Add(space);*/
                
             }
 
