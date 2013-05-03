@@ -9,6 +9,7 @@ using PicasaASP.Image_Service;
 using System.Drawing;
 using System.IO;
 using PicasaASP.User_Service;
+using System.Web.UI.HtmlControls;
 
 namespace PicasaASP
 {
@@ -188,15 +189,19 @@ namespace PicasaASP
             int currentAlbumId = album_client.Get_Album_ID(album_name, Convert.ToInt32(((Button)sender).CommandName));
             int[] ids = image_client.Get_Images_ID_From_Album(currentAlbumId);
 
-            Dictionary<String, System.Web.UI.WebControls.Image> imagesAlbum = new Dictionary<String, System.Web.UI.WebControls.Image>();
+            Dictionary<String, HtmlAnchor> imagesAlbum = new Dictionary<String, HtmlAnchor>();
             foreach (int id in ids)
             {
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
                 img.ImageUrl = "Image.aspx?id=" + id + "&idAlbum=" + currentAlbumId;
                 img.Width = 300;
                 img.Height = 200;
+                HtmlAnchor href = new HtmlAnchor();
+                href.HRef = img.ImageUrl;
+                href.Controls.Add(img);
+                href.Target = "_blank";
 
-                imagesAlbum.Add(image_client.Get_Image_Name(currentAlbumId, id), img);
+                imagesAlbum.Add(image_client.Get_Image_Name(currentAlbumId, id), href);
 
 
             }
