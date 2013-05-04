@@ -112,10 +112,13 @@ namespace PicasaWPF
             }
             if (files.Count == 0)
             {
+                no_img.Visibility = Visibility.Visible;
                 no_img.FontSize = 30;
                 no_img.VerticalAlignment = VerticalAlignment.Center;
                 no_img.Content = "NO PICTURES AVAILABLE IN THE LOCAL FOLDER";
             }
+            else if (no_img.Visibility == Visibility.Visible)
+                no_img.Visibility = Visibility.Collapsed;
             return files;
         }
 
