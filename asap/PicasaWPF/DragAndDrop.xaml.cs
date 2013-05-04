@@ -23,6 +23,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Collections;
+using System.Windows.Controls.Primitives;
 
 namespace PicasaWPF
 {
@@ -133,10 +134,13 @@ namespace PicasaWPF
             }
             if (files.Count == 0)
             {
+                no_img_db.Visibility = Visibility.Visible;
                 no_img_db.FontSize = 30;
                 no_img_db.VerticalAlignment = VerticalAlignment.Center;
                 no_img_db.Content = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
             }
+            else if (no_img_db.Visibility == Visibility.Visible)
+                no_img_db.Visibility = Visibility.Collapsed;
             return files;
         }
 
@@ -176,6 +180,8 @@ namespace PicasaWPF
                           }
                      }
                  }
+                 if (no_img_db.Visibility == Visibility.Visible)
+                     no_img_db.Visibility = Visibility.Collapsed;
                  addImage(data.Image, data.Name, this.idAlbum);
             }
         }
@@ -306,5 +312,29 @@ namespace PicasaWPF
             ObjectDataProvider imageSrc2 = (ObjectDataProvider)FindResource("ImageCollection2");
             imageSrc2.ObjectInstance = imageCollection2;
         }
+
+        private void Image_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Popup pop = new Popup();
+            pop.MouseRightButtonUp += new MouseButtonEventHandler(Popup_MouseUp);
+            pop.Height = 600;
+            pop.Width = 800;
+
+            pop.Placement = PlacementMode.Center;
+
+            Image imagePopup = new Image();
+            imagePopup.Source = ((Image)sender).Source;
+
+            pop.Child = imagePopup;
+            pop.IsOpen = true;
+
+        }
+
+        private void Popup_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ((Popup)sender).IsOpen = false;
+        }
+
+        
     }
 }
