@@ -37,6 +37,11 @@ namespace PicasaServices
             return resp;
         }
 
+        public String Get_Name_From_Album(int idAlbum)
+        {
+            return dataAccess.Get_Name_From_Album(idAlbum);
+        }
+
 
     }
 }

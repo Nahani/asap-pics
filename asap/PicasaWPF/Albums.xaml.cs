@@ -78,7 +78,7 @@ namespace PicasaWPF
             {
                 no_album.FontSize = 30;
                 no_album.VerticalAlignment = VerticalAlignment.Center;
-                no_album.Content = "NO ALBUM AVAILABLE IN THE LOCAL FOLDER";
+                no_album.Content = "NO ALBUM AVAILABLE IN THE DATABASE";
             }
 
 
