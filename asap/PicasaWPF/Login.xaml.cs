@@ -34,6 +34,7 @@ namespace PicasaWPF
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            this.ResizeMode = System.Windows.ResizeMode.NoResize;
         }
         
         public void checkUser(object sender, EventArgs e)

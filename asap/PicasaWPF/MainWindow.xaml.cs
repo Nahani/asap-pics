@@ -41,6 +41,7 @@ namespace PicasaWPF
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            this.ResizeMode = System.Windows.ResizeMode.NoResize;
         }
 
         private void connection_Click(object sender, RoutedEventArgs e)

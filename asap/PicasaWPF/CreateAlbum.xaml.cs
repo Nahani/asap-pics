@@ -33,6 +33,7 @@ namespace PicasaWPF
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            this.ResizeMode = System.Windows.ResizeMode.NoResize;
         }
 
         public void addAlbum(object sender, EventArgs e)

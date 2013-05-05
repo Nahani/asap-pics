@@ -24,7 +24,7 @@ HorizontalAlignment="Center"/>
     <Grid>
         <ListBox x:Name="AlbumListbox" Background="LightGreen"
 ItemsSource="{Binding}"
-ScrollViewer.VerticalScrollBarVisibility="Visible"
+ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 DataContext="{StaticResource AlbumCollection1}"
 ItemTemplate="{StaticResource AlbumSourceTemplate}" Margin="0,0,0,50">
             <ListBox.ItemsPanel>
