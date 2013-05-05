@@ -39,12 +39,12 @@ namespace PicasaWPF
         private ListBox dragSource = null;
 
 
-        public DragAndDrop(int IdAlbum)
+        public DragAndDrop(int IdAlbum, String nameAlbum)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             this.idAlbum = IdAlbum;
-            this.Title = "Images From " + MainWindow.album_client.Get_Name_From_Album(idAlbum);
+            this.Title = "Images From " + nameAlbum;
             // On crée notre collection d'image et on y ajoute deux images
             imageCollection1 = new ImageCollection();
             Dictionary<string, byte[]> files = Read_Images_From_Local_Folder(PATH);

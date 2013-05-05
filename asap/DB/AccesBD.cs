@@ -55,7 +55,5 @@ namespace DB
 
         bool Check_password(String login, String password);
 
-        String Get_Name_From_Album(int idAlbum);
-
     }
 }

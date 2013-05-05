@@ -99,7 +99,7 @@ namespace PicasaWPF
         {
             Button b = sender as Button;
             int idA = MainWindow.album_client.Get_Album_ID((string)b.Tag, MainWindow.currentId);
-            DragAndDrop drag = new DragAndDrop(idA);
+            DragAndDrop drag = new DragAndDrop(idA, (string)b.Tag);
             this.Close();
             drag.Show();
         }

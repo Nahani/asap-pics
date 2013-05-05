@@ -36,12 +36,5 @@ namespace PicasaServices
             resp.Albums = dataAccess.Get_Albums_From_Other_Users(idProp);
             return resp;
         }
-
-        public String Get_Name_From_Album(int idAlbum)
-        {
-            return dataAccess.Get_Name_From_Album(idAlbum);
-        }
-
-
     }
 }

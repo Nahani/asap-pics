@@ -78,16 +78,6 @@ namespace PicasaServices
          */
         [OperationContract]
         int Get_Album_ID(String name, int idProp);
-
-        /* 
-         * Récupérer le nom d'un album
-         * 
-         * @param idAlbum   : l'id de l'album
-         * 
-         * @return le nom de l'album          
-         */
-        [OperationContract]
-        String Get_Name_From_Album(int idAlbum);
     }
 
     [DataContract]

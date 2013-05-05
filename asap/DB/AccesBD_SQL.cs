@@ -158,27 +158,6 @@ namespace DB
         }
 
         /* 
-         * Récupérer le nom d'un album
-         * 
-         * @param idAlbum   : l'id de l'album
-         * 
-         * @return le nom de l'album          * 
-         */
-        public String Get_Name_From_Album(int idAlbum)
-        {
-            String name = null;
-            String req = "SELECT name FROM ALBUM WHERE id = '" + idAlbum + "';";
-            SqlDataReader reader = Connexion.execute_Select(req);
-
-            while (reader.Read())
-            {
-                name = reader.GetString(0);
-            }
-            Connexion.close();
-            return name;
-        }
-
-        /* 
          * Récupérer tous les identifiants des images d'un album
          * 
          * @param idAlbum   : le nom de l'album contenant

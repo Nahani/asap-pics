@@ -48,7 +48,7 @@ namespace PicasaWPF
                 MessageBoxResult result;
                 int id = MainWindow.album_client.Get_Album_ID(name, MainWindow.currentId);
                 result = MessageBox.Show("Album créé !");
-                DragAndDrop drag = new DragAndDrop(id);
+                DragAndDrop drag = new DragAndDrop(id, name);
                 this.Close();
                 drag.Show();
             }
