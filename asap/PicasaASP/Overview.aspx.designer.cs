@@ -22,6 +22,8 @@ namespace PicasaASP {
         protected global::System.Web.UI.HtmlControls.HtmlForm main;
 
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reponse;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reponseAlbums;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reponseOtherAlbums;
         
         /// <summary>
         /// Contrôle albums.
