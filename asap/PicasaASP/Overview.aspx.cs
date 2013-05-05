@@ -137,7 +137,7 @@ namespace PicasaASP
                
             }
 
-            
+            n = 0;
             foreach (System.Web.UI.WebControls.Image img in albumsDico.Keys)
             {
                 n++;
