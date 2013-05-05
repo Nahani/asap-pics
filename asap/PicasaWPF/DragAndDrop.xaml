@@ -85,8 +85,8 @@ Drop="ImageDropEvent" Margin="0,30,0,52" Grid.Row="2" />
         <Button Content="Choose local folder" Grid.Row="2" Height="34" Margin="0,354,460,0" Name="button2" VerticalAlignment="Top" Width="169" Click="ChooseFolder" HorizontalAlignment="Right" />
         <Button Content="Refresh" Grid.Row="2" Height="34" Margin="867,354,0,0" Name="button3" VerticalAlignment="Top" Width="160" Click="refresh" HorizontalAlignment="Left" />
         <Label Content="Images from the database. To delete a picture, just double click on it. To zoom on a picture, just right clic on it." Height="28" HorizontalAlignment="Left" Margin="280,0,0,0" Name="label2" VerticalAlignment="Top" Width="609" Grid.Row="2" />
-        <Label Name="no_img" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1102" Margin="0,46,0,6" Height="50" Visibility="Collapsed" />
-        <Label Name="no_img_db" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="1102" Margin="1,30,-1,52" Height="50" Grid.Row="2" Visibility="Collapsed"/>
+        <Label Name="no_img" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="1100"  Height="50" Visibility="Collapsed" />
+        <Label Name="no_img_db" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"   Width="1100"  Height="50" Grid.Row="2"/>
         <Label Content="Images from the local folder. To zoom on a picture, just right clic on it." Height="28" HorizontalAlignment="Left" Margin="353,12,0,0" Name="label1" VerticalAlignment="Top" Width="609" />
     </Grid>
 </Window>

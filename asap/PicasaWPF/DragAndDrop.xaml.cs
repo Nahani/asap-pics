@@ -34,7 +34,7 @@ namespace PicasaWPF
     {
         private ImageCollection imageCollection1;
         private ImageCollection imageCollection2;
-        private static string PATH = "C:\\Users\\user\\Pictures\\dossier";
+        private static string PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         private int idAlbum;
         private ListBox dragSource = null;
 
@@ -116,7 +116,8 @@ namespace PicasaWPF
             {
                 no_img.Visibility = Visibility.Visible;
                 no_img.FontSize = 30;
-                no_img.VerticalAlignment = VerticalAlignment.Center;
+                no_img.Foreground = Brushes.Crimson;
+                no_img.FontFamily = new FontFamily("Aharoni");
                 no_img.Content = "NO PICTURES AVAILABLE IN THE LOCAL FOLDER";
             }
             else if (no_img.Visibility == Visibility.Visible)
@@ -141,7 +142,8 @@ namespace PicasaWPF
             {
                 no_img_db.Visibility = Visibility.Visible;
                 no_img_db.FontSize = 30;
-                no_img_db.VerticalAlignment = VerticalAlignment.Center;
+                no_img_db.Foreground = Brushes.BlueViolet;
+                no_img_db.FontFamily = new FontFamily("Aharoni");
                 no_img_db.Content = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
             }
             else if (no_img_db.Visibility == Visibility.Visible)
