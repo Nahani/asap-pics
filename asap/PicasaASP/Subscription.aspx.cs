@@ -20,9 +20,13 @@ namespace PicasaASP
             string pwd = PW.Text;
             string mail = MA.Text;
             int id;
-            if (!user_client.Add(first_name, last_name, login, mail, pwd, false))
+            if(first_name.Equals("") || last_name.Equals("") || login.Equals("") || pwd.Equals("") || mail.Equals(""))
             {
-                reponse.InnerText = "ERROR : Subscription hasn't turned to succeed.";
+                reponse.InnerText = "ERROR : Please fill all the blanks";
+            }
+            else if (!user_client.Add(first_name, last_name, login, mail, pwd, false) )
+            {
+                 reponse.InnerText = "ERROR : Subscription hasn't turned to succeed (login already exists).";
             }
             else
             {
