@@ -66,7 +66,7 @@ HorizontalAlignment="Center"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Popup Name="popupImage" Placement="Center" MouseRightButtonUp="Popup_MouseUp"  Height="600" Width="800"></Popup>
+        <Popup Name="popupImage" Placement="Center" MouseRightButtonUp="Popup_MouseUp" StaysOpen="False" Height="600" Width="800"></Popup>
         <ListBox x:Name="ListBox1" Background="LightBlue"
 Style="{StaticResource ImageListBoxStyle}" Margin="0,46,0,6"
 DataContext="{StaticResource ImageCollection1}"
