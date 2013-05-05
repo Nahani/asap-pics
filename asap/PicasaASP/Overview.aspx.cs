@@ -105,6 +105,9 @@ namespace PicasaASP
             table.HorizontalAlign = HorizontalAlign.Center;
             albums.Controls.Add(table);
 
+            if (userAlbums.Albums.Count() == 0)
+                reponseAlbums.InnerText = "you don't own any album";
+
 
             AlbumsResponse otherAlbums = album_client.Get_Albums_From_Other_Users(currentId);
             albumsDico = new Dictionary<System.Web.UI.WebControls.Image, Button>();
@@ -171,6 +174,9 @@ namespace PicasaASP
 
             table.HorizontalAlign = HorizontalAlign.Center;
             albumsVisu.Controls.Add(table);
+
+            if (otherAlbums.Albums.Count() == 0)
+                reponseOtherAlbums.InnerText = "There is not any album from other users";
 
         }
 
