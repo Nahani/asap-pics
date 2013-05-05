@@ -320,18 +320,10 @@ namespace PicasaWPF
 
         private void Image_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Popup pop = new Popup();
-            pop.MouseRightButtonUp += new MouseButtonEventHandler(Popup_MouseUp);
-            pop.Height = 600;
-            pop.Width = 800;
-
-            pop.Placement = PlacementMode.Center;
-
             Image imagePopup = new Image();
             imagePopup.Source = ((Image)sender).Source;
-
-            pop.Child = imagePopup;
-            pop.IsOpen = true;
+            popupImage.Child = imagePopup;
+            popupImage.IsOpen = true;
 
         }
 
