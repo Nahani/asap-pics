@@ -78,7 +78,7 @@ namespace PicasaWPF
            if (albums.Albums.Length == 0)
             {
                 no_album.FontSize = 30;
-                no_album.VerticalAlignment = VerticalAlignment.Center;
+                no_album.FontFamily = new System.Windows.Media.FontFamily("Aharoni");
                 no_album.Content = "NO ALBUM AVAILABLE IN THE DATABASE";
             }
 
