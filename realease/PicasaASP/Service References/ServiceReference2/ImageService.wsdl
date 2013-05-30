@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ImageService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:49250/ImageService.svc?xsd=xsd1" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:49250/ImageService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:49250/ImageService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:49250/ImageService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PicasaServices" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ImageUploadRequest">
+    <wsdl:part name="parameters" element="tns:ImageUploadRequest" />
+  </wsdl:message>
+  <wsdl:message name="ImageUploadRequest_Headers">
+    <wsdl:part name="ImageInfo" element="tns:ImageInfo" />
+  </wsdl:message>
+  <wsdl:message name="IImageService_Add_OutputMessage" />
+  <wsdl:message name="IImageService_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="IImageService_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImageDownloadRequest">
+    <wsdl:part name="parameters" element="tns:ImageDownloadRequest" />
+  </wsdl:message>
+  <wsdl:message name="ImageDownloadResponse">
+    <wsdl:part name="parameters" element="tns:ImageDownloadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImageService_Get_Image_Name_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Image_Name" />
+  </wsdl:message>
+  <wsdl:message name="IImageService_Get_Image_Name_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Image_NameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImageService_Get_Image_ID_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Image_ID" />
+  </wsdl:message>
+  <wsdl:message name="IImageService_Get_Image_ID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Image_IDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IImageService">
+    <wsdl:operation name="Add">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImageService/Add" name="ImageUploadRequest" message="tns:ImageUploadRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImageService/AddResponse" message="tns:IImageService_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImageService/Delete" message="tns:IImageService_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImageService/DeleteResponse" message="tns:IImageService_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Image">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImageService/Get_Image" name="ImageDownloadRequest" message="tns:ImageDownloadRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImageService/Get_ImageResponse" name="ImageDownloadResponse" message="tns:ImageDownloadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Image_Name">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImageService/Get_Image_Name" message="tns:IImageService_Get_Image_Name_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImageService/Get_Image_NameResponse" message="tns:IImageService_Get_Image_Name_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Image_ID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImageService/Get_Image_ID" message="tns:IImageService_Get_Image_ID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImageService/Get_Image_IDResponse" message="tns:IImageService_Get_Image_ID_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IImageService" type="tns:IImageService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://tempuri.org/IImageService/Add" style="document" />
+      <wsdl:input name="ImageUploadRequest">
+        <soap:header message="tns:ImageUploadRequest_Headers" part="ImageInfo" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/IImageService/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Image">
+      <soap:operation soapAction="http://tempuri.org/IImageService/Get_Image" style="document" />
+      <wsdl:input name="ImageDownloadRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ImageDownloadResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Image_Name">
+      <soap:operation soapAction="http://tempuri.org/IImageService/Get_Image_Name" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Image_ID">
+      <soap:operation soapAction="http://tempuri.org/IImageService/Get_Image_ID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImageService">
+    <wsdl:port name="BasicHttpBinding_IImageService" binding="tns:BasicHttpBinding_IImageService">
+      <soap:address location="http://localhost:49250/ImageService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

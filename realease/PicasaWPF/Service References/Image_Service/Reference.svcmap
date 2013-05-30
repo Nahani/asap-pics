@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f4f7dd1d-bc6b-465e-95ec-38e005dc340a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:49250/ImageService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ImageService.xsd" MetadataType="Schema" ID="83c033f0-9f53-4ea2-b83f-945dc77aacfe" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ImageService.wsdl" MetadataType="Wsdl" ID="b842516a-c3ee-43b1-9818-6791d09d5b6d" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?wsdl" />
+    <MetadataFile FileName="ImageService1.xsd" MetadataType="Schema" ID="5bd79742-934e-4421-944c-808801e8b710" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ImageService2.xsd" MetadataType="Schema" ID="d1f4550b-f89e-45c0-b4e7-96cf62f66fd1" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?xsd=xsd5" />
+    <MetadataFile FileName="ImageService3.xsd" MetadataType="Schema" ID="c315a5f1-221e-4741-b470-d190e791377a" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ImageService4.xsd" MetadataType="Schema" ID="a0b7df0c-dff6-47a7-ae48-3cc1edca2626" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?xsd=xsd6" />
+    <MetadataFile FileName="ImageService5.xsd" MetadataType="Schema" ID="91a1403d-713a-4b3a-9102-5ce8fad73132" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ImageService6.xsd" MetadataType="Schema" ID="a466bb04-16fc-4d07-8f46-3414135f1e8e" SourceId="1" SourceUrl="http://localhost:49250/ImageService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
