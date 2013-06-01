@@ -6,49 +6,23 @@
     <Window.Resources>
         <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
         <ObjectDataProvider x:Key="ImageCollection1"/>
-        <DataTemplate x:Key="ImageDestTemplate">
-            <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="Black"
-BorderThickness="3" CornerRadius="5">
-                <StackPanel Orientation="Vertical">
-                    <Image MouseRightButtonUp="Image_MouseRightButtonUp" Width="150" Height="100" Stretch="Fill"
-Source="{Binding Path=Image, Converter={StaticResource
-ByteArrayToImageConverter}, Mode=Default}"/>
-                    <TextBlock Text="{Binding Path=Name}"
-HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-        </DataTemplate>
-        <DataTemplate x:Key="ImageSourceTemplate">
-            <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="Black"
-BorderThickness="3" CornerRadius="5">
-                <StackPanel Orientation="Vertical">
-                    <Image MouseRightButtonUp="Image_MouseRightButtonUp" Width="150" Height="100" Stretch="Fill"
-Source="{Binding Path=Image, Converter={StaticResource
-ByteArrayToImageConverter}, Mode=Default}"/>
-                    <TextBlock Text="{Binding Path=Name}"
-HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-        </DataTemplate>
         <ObjectDataProvider x:Key="ImageCollection2"/>
+        <DataTemplate x:Key="ImageTemplate">
+            <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="Black"
+BorderThickness="3" CornerRadius="5">
+                <StackPanel Orientation="Vertical">
+                    <Image MouseRightButtonUp="Image_MouseRightButtonUp" Width="150" Height="100" Stretch="Fill"
+Source="{Binding Path=Image, Converter={StaticResource
+ByteArrayToImageConverter}, Mode=Default}"/>
+                    <TextBlock Text="{Binding Path=Name}"
+HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
         <Style x:Key="ImageListBoxStyle" TargetType="ListBox">
             <Setter Property="AllowDrop" Value="True" />
             <Setter Property="ItemsSource" Value="{Binding}" />
-            <Setter Property="ItemTemplate" Value="{StaticResource ImageSourceTemplate}" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-            <Setter Property="ListBox.ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="ImageListBoxStyle2" TargetType="ListBox">
-            <Setter Property="AllowDrop" Value="True" />
-            <Setter Property="ItemsSource" Value="{Binding}" />
-            <Setter Property="ItemTemplate" Value="{StaticResource ImageDestTemplate}" />
+            <Setter Property="ItemTemplate" Value="{StaticResource ImageTemplate}" />
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
             <Setter Property="ListBox.ItemsPanel">
@@ -77,10 +51,10 @@ ResizeBehavior="PreviousAndNext"
 Height="5"
 Grid.Row="1"/>
         <ListBox x:Name="ListBox2"  Background="LightGreen"
-Style="{StaticResource ImageListBoxStyle2}"
+Style="{StaticResource ImageListBoxStyle}" Margin="0,30,0,52"
 DataContext="{StaticResource ImageCollection2}"
 PreviewMouseLeftButtonDown="ImageDragEvent" PreviewMouseDoubleClick="deleteImage"
-Drop="ImageDropEvent" Margin="0,30,0,52" Grid.Row="2" />
+Drop="ImageDropEvent"  Grid.Row="2" />
         <Button Content="Return" Grid.Row="2" Height="34" Margin="68,354,0,0" Name="button1" VerticalAlignment="Top" Width="164" Click="return_click" HorizontalAlignment="Left" />
         <Button Content="Choose local folder" Grid.Row="2" Height="34" Margin="0,354,460,0" Name="button2" VerticalAlignment="Top" Width="169" Click="ChooseFolder" HorizontalAlignment="Right" />
         <Button Content="Refresh" Grid.Row="2" Height="34" Margin="867,354,0,0" Name="button3" VerticalAlignment="Top" Width="160" Click="refresh" HorizontalAlignment="Left" />

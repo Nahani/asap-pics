@@ -24,6 +24,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Collections;
 using System.Windows.Controls.Primitives;
+using System.Threading;
 
 namespace PicasaWPF
 {
@@ -58,16 +59,18 @@ namespace PicasaWPF
             (ObjectDataProvider)FindResource("ImageCollection1");
             imageSource.ObjectInstance = imageCollection1;
 
-            imageCollection2 = new ImageCollection();
-            files = Read_Images_From_DB(idAlbum);
-            for (int i = 0; i < files.Values.Count; i++)
-            {
-                imageCollection2.Add(new ImageObject(files.Keys.ElementAt(i), files.Values.ElementAt(i)));
-            }
+            no_img_db.Visibility = Visibility.Visible;
+            no_img_db.FontSize = 30;
+            no_img_db.Foreground = Brushes.Crimson;
+            no_img_db.FontFamily = new FontFamily("Aharoni");
+            no_img_db.Content = "LOADING...";
 
-            // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
-            ObjectDataProvider imageSrc = (ObjectDataProvider)FindResource("ImageCollection2");
-            imageSrc.ObjectInstance = imageCollection2;
+            Thread th = new Thread(new ParameterizedThreadStart(Read_Images_From_DB));
+            th.Start(idAlbum);
+
+
+
+           
         }
 
         private static void writeInFile(string chemin, byte[] file)
@@ -107,7 +110,7 @@ namespace PicasaWPF
             {
                 string tmp = fi.FullName;
                 string[] tabTmp = tmp.Split('.');
-                if (tabTmp[tabTmp.Length - 1].ToLower() == "jpg" || tabTmp[tabTmp.Length - 1].ToLower() == "png")
+                if (tabTmp[tabTmp.Length - 1].ToLower() == "jpg" || tabTmp[tabTmp.Length - 1].ToLower() == "png" || tabTmp[tabTmp.Length - 1].ToLower() == "jpeg" || tabTmp[tabTmp.Length - 1].ToLower() == "bmp")
                 {
                     files.Add(fi.Name.Split('.')[0], ImageObject.lireFichier(fi.FullName));
                 }
@@ -125,30 +128,41 @@ namespace PicasaWPF
             return files;
         }
 
-        private Dictionary<string, byte[]> Read_Images_From_DB(int idAlbum)
+        private void Read_Images_From_DB(Object idAlbum)
         {
+            imageCollection2 = new ImageCollection();
+
+            
             Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
-            int[] idImages = MainWindow.image_client.Get_Images_ID_From_Album(idAlbum);
+            int[] idImages = MainWindow.image_client.Get_Images_ID_From_Album((int)idAlbum);
             foreach (int id in idImages)
             {
                 Image_Service.ImageInfo img = new Image_Service.ImageInfo();
                 img.ID = id;
-                img.Album = idAlbum;
+                img.Album = (int)idAlbum;
                 img.Name = MainWindow.image_client.Get_Image_Name(img.Album, id);
                 byte[] bytes = ImageObject.GetBytes(MainWindow.image_client.Get_Image(img));
-                files.Add(img.Name, bytes);
+                imageCollection2.Add(new ImageObject(img.Name, bytes));
             }
-            if (files.Count == 0)
-            {
-                no_img_db.Visibility = Visibility.Visible;
-                no_img_db.FontSize = 30;
-                no_img_db.Foreground = Brushes.BlueViolet;
-                no_img_db.FontFamily = new FontFamily("Aharoni");
-                no_img_db.Content = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
-            }
-            else if (no_img_db.Visibility == Visibility.Visible)
-                no_img_db.Visibility = Visibility.Collapsed;
-            return files;
+
+            this.Dispatcher.Invoke(new Action(check));
+            // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
+            ObjectDataProvider imageSrc = (ObjectDataProvider)FindResource("ImageCollection2");
+            imageSrc.ObjectInstance = imageCollection2;
+        }
+
+        private void check()
+        {
+           if (imageCollection2.Count == 0)
+           {
+               no_img_db.Visibility = Visibility.Visible;
+               no_img_db.FontSize = 30;
+               no_img_db.Foreground = Brushes.BlueViolet;
+               no_img_db.FontFamily = new FontFamily("Aharoni");
+               no_img_db.Content = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
+           }
+           else if (no_img_db.Visibility == Visibility.Visible)
+               no_img_db.Visibility = Visibility.Collapsed;
         }
 
         // On initie le Drag and Drop
@@ -171,20 +185,22 @@ namespace PicasaWPF
             {
                 ImageObject data = (ImageObject)e.Data.GetData(typeof(ImageObject));
                 ((IList)parent.ItemsSource).Add(data);
-                 Dictionary<string, byte[]> files = Read_Images_From_DB(idAlbum);
-                 for (int i = 0; i < files.Values.Count; i++)
+                // -1 pour pas le comparer avec lui même car il à été ajouté automatiquement dans imageCollection avec le drag&drop
+                for (int i = 0; i < imageCollection2.Count-1; i++)
                  {
-                     //MessageBox.Show(files.Keys.ElementAt(i).TrimEnd() + " " + data.Name.TrimEnd() + ".jpg");
-                     if (files.Keys.ElementAt(i).TrimEnd().Equals(data.Name.TrimEnd()))
+                     if (imageCollection2.ElementAt(i).Name.TrimEnd().Equals(data.Name.TrimEnd()))
                      {
                           MessageBoxResult result = MessageBox.Show("File of name '" + data.Name.TrimEnd() + "' already exists. Do you really want to replace it from DB ?", "Caption", MessageBoxButton.YesNo);
                           if (result == MessageBoxResult.Yes)
                           {
                               MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum);
                               addImage(data.Image, data.Name, this.idAlbum);
-                              db_maj(); 
+                              imageCollection2.RemoveAt(i);
+                              imageCollection2.Add(data);
                               return;
                           }
+                          else
+                              imageCollection2.RemoveAt(imageCollection2.Count - 1);
                      }
                  }
                  if (no_img_db.Visibility == Visibility.Visible)
@@ -207,7 +223,6 @@ namespace PicasaWPF
                     
                     string tmp = fi.FullName;
                     string[] tabTmp = tmp.Split('\\');
-                    //MessageBox.Show("tmp : " + tabTmp[tabTmp.Length-1].ToLower() + " AND data : " + data.Name.TrimEnd() + ".jpg");
                     if ((tabTmp[tabTmp.Length - 1].ToLower()).Equals(data.Name.TrimEnd() + ".jpg"))
                     {
                         MessageBoxResult result = MessageBox.Show("File of name '" + data.Name.TrimEnd() + "' already exists. Do you really want to remove it from local repository ?", "Caption", MessageBoxButton.YesNo);
@@ -286,7 +301,14 @@ namespace PicasaWPF
             if (result == MessageBoxResult.Yes)
             {
                 MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum);
-                db_maj();
+                for (int i = 0; i < imageCollection2.Count; i++)
+                {
+                    if (imageCollection2[i].Name.Equals(data.Name))
+                    {
+                        imageCollection2.RemoveAt(i);
+                        break;
+                    }
+                }
             }
         }
 
@@ -308,16 +330,16 @@ namespace PicasaWPF
 
         private void db_maj()
         {
+            imageCollection2.Clear();
+            no_img_db.Visibility = Visibility.Visible;
+            no_img_db.FontSize = 30;
+            no_img_db.Foreground = Brushes.Crimson;
+            no_img_db.FontFamily = new FontFamily("Aharoni");
+            no_img_db.Content = "LOADING...";
             imageCollection2 = new ImageCollection();
-            Dictionary<string, byte[]> files = Read_Images_From_DB(idAlbum);
-            for (int i = 0; i < files.Values.Count; i++)
-            {
-                imageCollection2.Add(new ImageObject(files.Keys.ElementAt(i), files.Values.ElementAt(i)));
-            }
 
-            // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
-            ObjectDataProvider imageSrc2 = (ObjectDataProvider)FindResource("ImageCollection2");
-            imageSrc2.ObjectInstance = imageCollection2;
+            Thread th = new Thread(new ParameterizedThreadStart(Read_Images_From_DB));
+            th.Start(idAlbum);
         }
 
         private void Image_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

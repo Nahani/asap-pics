@@ -79,6 +79,7 @@ namespace PicasaWPF
             {
                 no_album.FontSize = 30;
                 no_album.FontFamily = new System.Windows.Media.FontFamily("Aharoni");
+                no_album.Foreground = System.Windows.Media.Brushes.Navy;
                 no_album.Content = "NO ALBUM AVAILABLE IN THE DATABASE";
             }
 
