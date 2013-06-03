@@ -70,7 +70,7 @@ namespace PicasaWPF
 
 
 
-           
+
         }
 
         private static void writeInFile(string chemin, byte[] file)
@@ -132,7 +132,7 @@ namespace PicasaWPF
         {
             imageCollection2 = new ImageCollection();
 
-            
+
             Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
             int[] idImages = MainWindow.image_client.Get_Images_ID_From_Album((int)idAlbum);
             foreach (int id in idImages)
@@ -153,16 +153,16 @@ namespace PicasaWPF
 
         private void check()
         {
-           if (imageCollection2.Count == 0)
-           {
-               no_img_db.Visibility = Visibility.Visible;
-               no_img_db.FontSize = 30;
-               no_img_db.Foreground = Brushes.BlueViolet;
-               no_img_db.FontFamily = new FontFamily("Aharoni");
-               no_img_db.Content = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
-           }
-           else if (no_img_db.Visibility == Visibility.Visible)
-               no_img_db.Visibility = Visibility.Collapsed;
+            if (imageCollection2.Count == 0)
+            {
+                no_img_db.Visibility = Visibility.Visible;
+                no_img_db.FontSize = 30;
+                no_img_db.Foreground = Brushes.BlueViolet;
+                no_img_db.FontFamily = new FontFamily("Aharoni");
+                no_img_db.Content = "NO PICTURES AVAILABLE IN THE DATABASE FOR THIS ALBUM";
+            }
+            else if (no_img_db.Visibility == Visibility.Visible)
+                no_img_db.Visibility = Visibility.Collapsed;
         }
 
         // On initie le Drag and Drop
@@ -186,26 +186,25 @@ namespace PicasaWPF
                 ImageObject data = (ImageObject)e.Data.GetData(typeof(ImageObject));
                 ((IList)parent.ItemsSource).Add(data);
                 // -1 pour pas le comparer avec lui même car il à été ajouté automatiquement dans imageCollection avec le drag&drop
-                for (int i = 0; i < imageCollection2.Count-1; i++)
-                 {
-                     if (imageCollection2.ElementAt(i).Name.TrimEnd().Equals(data.Name.TrimEnd()))
-                     {
-                          MessageBoxResult result = MessageBox.Show("File of name '" + data.Name.TrimEnd() + "' already exists. Do you really want to replace it from DB ?", "Caption", MessageBoxButton.YesNo);
-                          if (result == MessageBoxResult.Yes)
-                          {
-                              MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum);
-                              addImage(data.Image, data.Name, this.idAlbum);
-                              imageCollection2.RemoveAt(i);
-                              imageCollection2.Add(data);
-                              return;
-                          }
-                          else
-                              imageCollection2.RemoveAt(imageCollection2.Count - 1);
-                     }
-                 }
-                 if (no_img_db.Visibility == Visibility.Visible)
-                     no_img_db.Visibility = Visibility.Collapsed;
-                 addImage(data.Image, data.Name, this.idAlbum);
+                for (int i = 0; i < imageCollection2.Count - 1; i++)
+                {
+                    if (imageCollection2.ElementAt(i).Name.TrimEnd().Equals(data.Name.TrimEnd()))
+                    {
+                        MessageBoxResult result = MessageBox.Show("File of name '" + data.Name.TrimEnd() + "' already exists. Do you really want to replace it from DB ?", "Caption", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum);
+                            new AddImageThread(data.Image, data.Name, this.idAlbum).run();
+                            imageCollection2.RemoveAt(i);
+                            return;
+                        }
+                        else
+                            imageCollection2.RemoveAt(imageCollection2.Count - 1);
+                    }
+                }
+                if (no_img_db.Visibility == Visibility.Visible)
+                    no_img_db.Visibility = Visibility.Collapsed;
+                new AddImageThread(data.Image, data.Name, this.idAlbum).run();
             }
         }
 
@@ -220,7 +219,7 @@ namespace PicasaWPF
                 ImageObject data = (ImageObject)e.Data.GetData(typeof(ImageObject));
                 foreach (FileInfo fi in filesInfo.ToList())
                 {
-                    
+
                     string tmp = fi.FullName;
                     string[] tabTmp = tmp.Split('\\');
                     if ((tabTmp[tabTmp.Length - 1].ToLower()).Equals(data.Name.TrimEnd() + ".jpg"))
@@ -230,7 +229,7 @@ namespace PicasaWPF
                         {
                             ((IList)parent.ItemsSource).Add(data);
                             writeInFile(PATH + "\\" + data.Name.TrimEnd() + ".jpg", data.Image);
-                            local_maj(); 
+                            local_maj();
                         }
                         return;
                     }
@@ -241,15 +240,7 @@ namespace PicasaWPF
             }
         }
 
-        private void addImage(byte[] img, string name, int idAlbum)
-        {
-            Image_Service.ImageInfo info = new Image_Service.ImageInfo();
-            info.ID = MainWindow.currentId;
-            info.Album = idAlbum;
-            info.Name = name.Split('.')[0];
-            MemoryStream image = new MemoryStream(img);
-            MainWindow.image_client.Add(info, image);
-        }
+
 
         // On récupére l'objet que que l'on a dropé
         private static object GetDataFromListBox(ListBox source, Point point)
@@ -300,7 +291,8 @@ namespace PicasaWPF
             MessageBoxResult result = MessageBox.Show("Do you really want to remove " + data.Name.TrimEnd() + " ?", "Caption", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum);
+                while (!MainWindow.image_client.Delete(MainWindow.image_client.Get_Image_ID(idAlbum, data.Name), idAlbum))
+                    Thread.Sleep(1000);
                 for (int i = 0; i < imageCollection2.Count; i++)
                 {
                     if (imageCollection2[i].Name.Equals(data.Name))
@@ -356,6 +348,36 @@ namespace PicasaWPF
             ((Popup)sender).IsOpen = false;
         }
 
-        
+        private class AddImageThread
+        {
+
+            private byte[] img;
+            private String name;
+            private int idAlbum;
+
+            public AddImageThread(byte[] img, string name, int idAlbum)
+            {
+                this.img = img;
+                this.name = name;
+                this.idAlbum = idAlbum;
+            }
+
+            private void addImage()
+            {
+                Image_Service.ImageInfo info = new Image_Service.ImageInfo();
+                info.ID = MainWindow.currentId;
+                info.Album = idAlbum;
+                info.Name = name.Split('.')[0];
+                MemoryStream image = new MemoryStream(img);
+                MainWindow.image_client.Add(info, image);
+            }
+
+            public void run()
+            {
+                Thread t = new Thread(new ThreadStart(addImage));
+                t.Start();
+            }
+        }
+
     }
 }
