@@ -23,6 +23,8 @@ namespace DB
 
         byte[] Get_Image(int id, int idAlbum);
 
+        byte[] Get_Thumb(int id, int idAlbum);
+
         List<byte[]> Get_Image_From_Albums(int idAlbum);
         
         List<int> Get_Image_ID_From_Albums(int idAlbum);
@@ -34,6 +36,14 @@ namespace DB
         Album Get_Album(String name, int idUser);
 
         List<Album> Get_Albums_From_User(int idUser);
+
+        List<int> Get_AlbumsID_From_User(int idUser);
+
+        List<Album> Get_Albums_From_Other_Users(int idUser);
+
+        List<int> Get_AlbumsID_From_Other_Users(int idUser);
+
+        String Get_Name_Album(int id);
 
         int Get_Id_Album(String name, int idProp);
 

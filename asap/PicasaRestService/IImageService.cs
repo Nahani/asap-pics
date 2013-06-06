@@ -52,6 +52,12 @@ namespace PicasaRestService
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         Stream Get_Image(string id, string idAlbum);
 
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "get_thumb/{id}/{idAlbum}",
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        Stream Get_Thumb(string id, string idAlbum);
+
        
 
     }

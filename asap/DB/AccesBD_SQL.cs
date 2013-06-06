@@ -89,7 +89,7 @@ namespace DB
         }
 
         /*
-	         * Obtenir une liste d'albums appartenant n'apparenant pas à l'utilisateur cible
+	     * Obtenir une liste d'albums appartenant n'apparenant pas à l'utilisateur cible
          *
          * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
 	         *
@@ -107,6 +107,25 @@ namespace DB
             return result;
         }
 
+        /*
+	     * Obtenir une liste d'id d'albums appartenant n'apparenant pas à l'utilisateur cible
+         *
+         * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
+	         *
+         * @return la liste d'id d'albums s'ils ont bien été récupérés, null le cas échéant
+         *
+         */
+        public List<int> Get_AlbumsID_From_Other_Users(int idUser)
+        {
+            String req = "SELECT id FROM ALBUM WHERE idUser <> '" + idUser + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+            List<int> result = new List<int>();
+            while (reader.Read())
+                result.Add(reader.GetInt32(0));
+            Connexion.close();
+            return result;
+        }
+
         /* 
          * Récupérer une image
          * 
@@ -120,6 +139,22 @@ namespace DB
         {
             byte[] blob = null;
             String req = "SELECT size,image FROM IMAGE WHERE idAlbum = '" + idAlbum + "' AND id='" + id + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+
+            if (reader.Read())
+            {
+                int size = reader.GetInt32(0);
+                blob = new byte[size];
+                reader.GetBytes(1, 0, blob, 0, size);
+            }
+            Connexion.close();
+            return blob;
+        }
+
+        public byte[] Get_Thumb(int id, int idAlbum)
+        {
+            byte[] blob = null;
+            String req = "SELECT thumb_size,thumb FROM IMAGE WHERE idAlbum = '" + idAlbum + "' AND id='" + id + "';";
             SqlDataReader reader = Connexion.execute_Select(req);
 
             if (reader.Read())
@@ -191,8 +226,8 @@ namespace DB
             if (Get_Id_Img(im.IdAlbum, im.Name) == -1)
             {
                 SqlCommand req = new SqlCommand(
-               "INSERT INTO IMAGE (idAlbum, name,  size, image) " +
-               "VALUES(@idAlbum, @name, @size, @image)", Connexion.Connection);
+               "INSERT INTO IMAGE (idAlbum, name,  size, image, thumb, thumb_size) " +
+               "VALUES(@idAlbum, @name, @size, @image, @thumb, @thumb_size)", Connexion.Connection);
                 req.Parameters.Add("@idAlbum", SqlDbType.Int).Value
                 = im.IdAlbum;
                 req.Parameters.Add("@name", SqlDbType.NChar, im.Name.Length).Value
@@ -200,6 +235,9 @@ namespace DB
                 req.Parameters.Add("@size", SqlDbType.Int).Value = im.Image.Length;
                 req.Parameters.Add("@image", SqlDbType.Image, im.Image.Length).Value
                 = im.Image;
+                req.Parameters.Add("@thumb", SqlDbType.Image, im.Thumb.Length).Value
+                = im.Thumb;
+                req.Parameters.Add("@thumb_size", SqlDbType.Int).Value = im.Thumb.Length;
 
                 flag = Connexion.execute_Request(req);
             }
@@ -260,6 +298,26 @@ namespace DB
                 result.Add(new Album(reader.GetString(0), idUser));
             Connexion.close();
             return result;
+        }
+
+        /*
+         * Obtenir une liste d'id d'album appartenant à un utilisateur cible
+         * 
+         * @param idUser    : l'identifiant de l'utilisateur propriétaire des albums cibles
+         * 
+         * @return la liste d'id des albums s'ils ont bien été récupérés, null le cas échéant
+         * 
+         */
+        public List<int> Get_AlbumsID_From_User(int idUser)
+        {
+            String req = "SELECT id FROM ALBUM WHERE idUser='" + idUser + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+            List<int> result = new List<int>();
+            while (reader.Read())
+                result.Add(reader.GetInt32(0));
+            Connexion.close();
+            return result;
+
         }
 
 
@@ -489,6 +547,19 @@ namespace DB
             }
             Connexion.close();
             return flag;
+        }
+
+        public String Get_Name_Album(int id)
+        {
+            String name = null;
+            String req = "SELECT name FROM ALBUM WHERE id='" + id + "';";
+            SqlDataReader reader = Connexion.execute_Select(req);
+            while (reader.Read())
+            {
+                name = reader.GetString(0);
+            }
+            Connexion.close();
+            return name;
         }
 
     }
