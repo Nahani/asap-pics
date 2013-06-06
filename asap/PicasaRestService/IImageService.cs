@@ -43,7 +43,7 @@ namespace PicasaRestService
         List<int> Get_Images_ID_From_Album(string idAlbum);
 
         [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "add/{idAlbum}/{name}/image")]
+        [WebInvoke(Method = "POST", UriTemplate = "add/{idAlbum}/{name}")]
         void Add(string idAlbum, string name, Stream image);
 
         [OperationContract]
