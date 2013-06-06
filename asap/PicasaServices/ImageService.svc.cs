@@ -22,7 +22,12 @@ namespace PicasaServices
             MemoryStream imageStreamEnMemoire = new MemoryStream();
             data.ImageData.CopyTo(imageStreamEnMemoire);
             imageBytes = imageStreamEnMemoire.ToArray();
-            bool result = dataAccess.Add_Img(new Img(data.ImageInfo.Album, data.ImageInfo.Name, imageBytes));
+            Image lol = new Bitmap(imageStreamEnMemoire);
+            MemoryStream thumbStreamEnMemoire = new MemoryStream();
+            Image thumb = lol.GetThumbnailImage(200, 200, null, IntPtr.Zero);
+            thumb.Save(thumbStreamEnMemoire, System.Drawing.Imaging.ImageFormat.Jpeg);
+            byte[] thumbBytes = thumbStreamEnMemoire.ToArray();
+            bool result = dataAccess.Add_Img(new Img(data.ImageInfo.Album, data.ImageInfo.Name, imageBytes, thumbBytes));
         }
 
         public bool Delete(int id, int idAlbum)
