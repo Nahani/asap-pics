@@ -61,6 +61,15 @@ namespace DB
             set { image = value; }
         }
 
+        // Image cible miniature
+        private byte[] thumb;
+
+        public byte[] Thumb
+        {
+            get { return thumb; }
+            set { thumb = value; }
+        }
+
         /* 
          * Constructeur normal d'une image
          * 
@@ -69,12 +78,13 @@ namespace DB
          * @param img       : l'image cible sous forme d'un tableau de bytes
          * 
          */
-        public Img(int idAlbum, String name, byte[] img)
+        public Img(int idAlbum, String name, byte[] img, byte[] thumb)
         {
             ;
             this.name = name;
             this.idAlbum = idAlbum;
             this.image = img;
+            this.thumb = thumb;
         }
 
 
