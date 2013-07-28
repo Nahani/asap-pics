@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c25ffc1e-e289-4d83-8e89-304d96aa25aa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://asap-pics.com/webservices/ImageService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ImageService.xsd" MetadataType="Schema" ID="c974ad8a-d886-4c2e-b50e-ebb690bed868" SourceId="1" SourceUrl="http://asap-pics.com/webservices/ImageService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ImageService1.xsd" MetadataType="Schema" ID="81f9c3c6-87b3-40bb-9663-69de1f5811d0" SourceId="1" SourceUrl="http://asap-pics.com/webservices/ImageService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ImageService2.xsd" MetadataType="Schema" ID="5c601643-4988-4cb9-99f8-e94c86bcb1ab" SourceId="1" SourceUrl="http://asap-pics.com/webservices/ImageService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ImageService3.xsd" MetadataType="Schema" ID="7a100fc5-bb42-40a4-a442-39d676def669" SourceId="1" SourceUrl="http://asap-pics.com/webservices/ImageService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ImageService4.xsd" MetadataType="Schema" ID="841ff6e8-cdb3-4fdc-9fd7-f18fbd765199" SourceId="1" SourceUrl="http://asap-pics.com/webservices/ImageService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ImageService.wsdl" MetadataType="Wsdl" ID="f2ee6dae-95a9-4fbc-92c7-6b5abaa1d239" SourceId="1" SourceUrl="http://asap-pics.com/webservices/ImageService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
